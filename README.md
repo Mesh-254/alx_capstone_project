@@ -138,10 +138,6 @@ FlavorRover aims to be a comprehensive culinary companion that offers not only a
 - Description: Web Content Accessibility Guidelines (WCAG) are followed to ensure that the application is accessible to users with disabilities.
 - Role: Accessibility features, such as proper semantic HTML tags, alt text for images, and keyboard navigation, are implemented to make the application inclusive.
 
-#### Front-End Libraries and Frameworks (optional):
-
-- Description: Depending on project requirements, front-end libraries or frameworks like React or Vue.js can be used to create dynamic and interactive user interfaces.
-- Role: These libraries can enhance the user experience by providing real-time updates, seamless navigation, and smooth interactions.
 
 #### Shopping List Generator (JavaScript):
 
