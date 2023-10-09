@@ -226,6 +226,6 @@ These technologies and tools collectively contribute to the development of Flavo
 
 ## Contact information
 
-- Name      : Meshack Mutune
+- Author    : Meshack Mutune
 - Linkedin  : <a href="https://www.linkedin.com/in/meshack-mutune/">Linkedin-Meshack</a>
 - Twitter   : <a href="https://twitter.com/toMeshack">Twitter-@toMeshack</a>
