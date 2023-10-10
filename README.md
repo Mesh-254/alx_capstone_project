@@ -234,4 +234,4 @@ These technologies and tools collectively contribute to the development of Flavo
 
 ## Prototype Design
 
-<img src="./images/FlavorRover-Project.pdf"/>
+<img src="./images/Screenshot from 2023-10-10 23-08-35.png"/>
