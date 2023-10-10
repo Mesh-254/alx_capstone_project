@@ -153,10 +153,6 @@ These technologies and tools collectively contribute to the development of Flavo
 
 ## Screenshots or Demo:
 
-- Roadmap and future enhancements:
-  Share any future plans or potential improvements for the project. This could include additional features, performance optimizations, or scalability considerations.
-- Contact information:
-  Include your name, along with contact information or links to personal portfolios or social media profiles
 
 ## Roadmap and future enhancements:
 
@@ -229,3 +225,12 @@ These technologies and tools collectively contribute to the development of Flavo
 - Author    : Meshack Mutune
 - Linkedin  : <a href="https://www.linkedin.com/in/meshack-mutune/">Linkedin-Meshack</a>
 - Twitter   : <a href="https://twitter.com/toMeshack">Twitter-@toMeshack</a>
+
+
+## Project Workflow 
+
+<img src="./images/Project_Workflow.png"/>
+
+
+## Prototype Design
+
