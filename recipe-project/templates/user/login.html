@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Page</title>
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+    <link rel="icon" types="image/ico" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Leckerli+One&display=swap" rel="stylesheet">
+    <!-- Links to an external stylesheet (CSS) called 'style.css' using Flask's 'url_for' function -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+    <div class="login-page">
+        <div class="login-section">
+            <div class="login">
+                <div class="heading">
+                    <h1 class="heading-text">Sign In to <span class="logo">FlavorRover</span></h1>
+                </div>
+            </div>
+            <div class="uk-text-center">
+                <p class="uk-margin-remove">Use your email account:</p>
+            </div>
+            <form class="uk-text-center">
+                <div class="uk-width">
+                    <label class="uk-form-label" for="email" >Email</label>
+                    <input id="email" class="uk-input " type="email"
+                        placeholder="Enter your email" required onkeyup="validateEmail()">
+                    <p id="email-error"></p>
+                </div>
+                <div class="uk-width">
+                    <label class="uk-form-label" for="password">Password</label>
+                    <input id="password" class="uk-input" type="password"
+                        placeholder="Enter your password" required onkeyup="validatePassword()">
+                    <p id="password-error"></p>
+                </div>
+                <div class="uk-width">
+                    <a class="forgot-password" href="#">Forgot your password?</a>
+                </div>
+                <div class="uk-width">
+                    <button class="uk-button">Sign In</button>
+                    <p id="submit-error"></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- JS Scripts -->
+    <script src="{{ url_for('static', filename ='js/login.js') }}"></script>
+    <!-- End of js scripts -->
+</body>
+
+</html>

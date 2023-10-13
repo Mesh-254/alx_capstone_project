@@ -1,0 +1,89 @@
+.login-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.login {
+  font-family: ubuntu;
+  padding: 20px;
+  font-size: 30px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.heading-text {
+  font-size: 35px;
+  text-align: center;
+  margin: 0;
+  font-family: "Ubuntu";
+  font-weight: 500;
+}
+.logo {
+  color: rgba(235, 74, 54, 1);
+}
+.uk-text-center {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.uk-form-label {
+  flex-basis: 28%;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 0%;
+}
+.uk-width {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.uk-input {
+  padding: 10px 60px;
+  margin: 20px 0;
+  border: 1px solid #eaecf0;
+  border-radius: 20px;
+  height: 25px;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.uk-link-muted {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.uk-link-muted:hover {
+  opacity: 0.7;
+}
+
+.uk-button {
+  background-color: rgba(235, 74, 54, 1);
+  color: #fff;
+  border: none;
+  padding: 15px 55px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.uk-button-primary:hover {
+  opacity: 0.8;
+}
+
+
+.uk-width p {
+  color: red;
+  font-size: medium;
+}
+
+.uk-width a {
+    text-decoration:none !important ;
+}
+
