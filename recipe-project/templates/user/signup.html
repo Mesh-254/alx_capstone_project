@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Signup Page</title>
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+    <link rel="icon" types="image/ico" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Leckerli+One&display=swap" rel="stylesheet">
+    <!-- Links to an external stylesheet (CSS) called 'style.css' using Flask's 'url_for' function -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+</head>
+
+<body>
+    <div class="signup-page">
+        <div class="signup-section">
+            <div class="signup">
+                <div class="heading">
+                    <h1 class="heading-text">Create an Account at<span class="logo">FlavorRover</span></h1>
+                </div>
+            </div>
+            <div class="uk-text-center">
+                <p class="uk-margin-remove">Use your email account:</p>
+            </div>
+            <form class="uk-text-center">
+                <div class="uk-width">
+                    <label class="uk-form-label" for="name" >Full name</label>
+                    <input id="name" class="uk-input " type="text"
+                        placeholder="Enter your full name" required onkeyup="validateName()">
+                    <p id="name-error"></p>
+                </div>
+                <div class="uk-width">
+                    <label class="uk-form-label" for="email" >Email</label>
+                    <input id="email" class="uk-input " type="email"
+                        placeholder="Enter your email" required onkeyup="validateEmail()">
+                    <p id="email-error"></p>
+                </div>
+                <div class="uk-width">
+                    <label class="uk-form-label" for="password">Password</label>
+                    <input id="password" class="uk-input" type="password"
+                        placeholder="Enter your password" required onkeyup="validatePassword()">
+                    <p id="password-error"></p>
+                </div>
+                <div class="uk-width">
+                    <label class="uk-form-label" for="password">Confirm Password</label>
+                    <input id="confirm-password" class="uk-input" type="password"
+                        placeholder="Enter your password" required onkeyup="confirmPassword()">
+                    <p id="confirm-password-error"></p>
+                </div>
+                <div class="uk-width">
+                    <button class="uk-button">Sign Up</button>
+                    <p id="submit-error"></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- JS Scripts -->
+    <script src="{{ url_for('static', filename ='js/signup.js') }}"></script>
+    <!-- End of js scripts -->
+</body>
+
+</html>
