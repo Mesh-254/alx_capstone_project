@@ -20,3 +20,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 });
+
+
+// Fade text in detail page when step icon is clicked 
+const icon = document.getElementsByClassName('step');
+function fadeText() {
+    const para = document.getElementsByClassName('step-content');
+    icon.addEventListener('click', function(){
+        console.log('you clicked me')
+        para.style.opacity  = 0.2;
+    })
+}
