@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Defines the character encoding for the document -->
+    <meta charset="UTF-8">
+
+    <!-- Sets the viewport settings for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Links to Google Fonts for font styles -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Raleway:700&display=swap" rel="stylesheet">
+
+    <!-- Add the Bootstrap CSS from the CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.20.0/font/bootstrap-icons.css" rel="stylesheet">
+
+
+
+
+    <link rel="icon" types="image/ico" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+    <!-- Theme style  -->
+    <!-- Links to an external stylesheet (CSS) called 'style.css' using Flask's 'url_for' function -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/recipe-detail.css') }}">
+
+    <!-- Sets the title of the web page displayed in the browser -->
+    <title>FlavorRover-detailPage</title>
+
+</head>
+
+<body>
+    <!-- The content of the web page goes here -->
+    <!-- Start of header section -->
+    <header>
+        <div class="header-container">
+            <!--start of logo-->
+            <div class="logo">
+                <h2>FlavorRover</h2>
+            </div>
+            <!--End of logo-->
+
+            <!--start of nav links-->
+            <nav class="nav-menu">
+                <a href="#">Home</a>
+                <a href="#">Search</a>
+                <a href="#">Recipe</a>
+                <a href="#">Contact</a>
+            </nav>
+            <!--End of nav links-->
+
+        </div>
+    </header>
+    <!-- End of header section -->
+
+    <!-- Main section  -->
+    <main>
+
+    </main>
+    <!-- End of Main section  -->
+
+    <!-- Recipe image and detail section -->
+    <section>
+        <div class="recipe-container">
+            <div class="recipe-grid row">
+                <div class="recipe-image col-md-6">
+                    <img class="img-fluid" src="https://source.unsplash.com/Zh0mYmMBZjQ/600x600" alt="Image alt">
+                </div>
+                <div class="recipe-text col-md-6">
+                    <div class="recipe-details">
+                        <h1>White calzones with marinara sauce</h1>
+                        <p>Supermarket brands of ricotta contain stabilizers, which can give the cheese a gummy texture
+                            when
+                            baked. Check the label and choose ricotta made with as few ingredients as possible.</p>
+                        <div class="data-grid">
+                            <div class="col-1">
+                                <svg width="28" height="28" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                    data-svg="clock">
+                                    <circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle>
+                                    <rect x="9" y="4" width="1" height="7"></rect>
+                                    <path fill="none" stroke="#000" stroke-width="1.1" d="M13.018,14.197 L9.445,10.625">
+                                    </path>
+                                </svg>
+                                <h5 class="uk-text-head">Active Time</h5>
+                                <span class="uk-text">20 mins</span>
+                            </div>
+                            <div class="col-1">
+                                <svg width="28" height="28" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                    data-svg="future">
+                                    <polyline points="19 2 18 2 18 6 14 6 14 7 19 7 19 2"></polyline>
+                                    <path fill="none" stroke="#000" stroke-width="1.1"
+                                        d="M18,6.548 C16.709,3.29 13.354,1 9.6,1 C4.6,1 0.6,5 0.6,10 C0.6,15 4.6,19 9.6,19 C14.6,19 18.6,15 18.6,10">
+                                    </path>
+                                    <rect x="9" y="4" width="1" height="7"></rect>
+                                    <path d="M13.018,14.197 L9.445,10.625" fill="none" stroke="#000" stroke-width="1.1">
+                                    </path>
+                                </svg>
+                                <h5 class="uk-text-head">Total Time</h5>
+                                <span class="uk-text">50mins</span>
+                            </div>
+                            <div class="col-1">
+                                <svg width="28" height="28" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                    data-svg="users">
+                                    <circle fill="none" stroke="#000" stroke-width="1.1" cx="7.7" cy="8.6" r="3.5">
+                                    </circle>
+                                    <path fill="none" stroke="#000" stroke-width="1.1"
+                                        d="M1,18.1 C1.7,14.6 4.4,12.1 7.6,12.1 C10.9,12.1 13.7,14.8 14.3,18.3"></path>
+                                    <path fill="none" stroke="#000" stroke-width="1.1"
+                                        d="M11.4,4 C12.8,2.4 15.4,2.8 16.3,4.7 C17.2,6.6 15.7,8.9 13.6,8.9 C16.5,8.9 18.8,11.3 19.2,14.1">
+                                    </path>
+                                </svg>
+                                <h5 class="uk-text-head">Yield</h5>
+                                <span class="uk-text">Serves 4</span>
+                            </div>
+                        </div>
+                        <hr style=" border: 1px solid black;">
+                        <div class="data-container">
+                            <div class="col-md-6 creator">
+                                <p class="creator-para">Created by <a href="#">Alex Williamns</a></p>
+                            </div>
+                            <div class="col-md-6 uk-icons">
+                                <a href="#" class="btn btn-link" data-toggle="tooltip" data-placement="top"
+                                    title="Save Recipe">
+                                    <svg width="24" height="24" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                        data-svg="plus-circle">
+                                        <circle fill="none" stroke="#000" stroke-width="1.1" cx="9.5" cy="9.5" r="9">
+                                        </circle>
+                                        <line fill="none" stroke="#000" x1="9.5" y1="5" x2="9.5" y2="14"></line>
+                                        <line fill="none" stroke="#000" x1="5" y1="9.5" x2="14" y2="9.5"></line>
+                                    </svg>
+                                </a>
+                                <a href="recipe.html#" class="btn btn-link ml-2" data-toggle="tooltip"
+                                    data-placement="top" title="Shopping List">
+                                    <svg width="24" height="24" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                        data-svg="cart">
+                                        <circle cx="7.3" cy="17.3" r="1.4"></circle>
+                                        <circle cx="13.3" cy="17.3" r="1.4"></circle>
+                                        <polyline fill="none" stroke="#000"
+                                            points="0 2 3.2 4 5.3 12.5 16 12.5 18 6.5 8 6.5"></polyline>
+                                    </svg>
+                                </a>
+                                <a href="recipe.html#" class="btn btn-link ml-2" data-toggle="tooltip"
+                                    data-placement="top" title="Print Recipe">
+                                    <svg width="24" height="24" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                        data-svg="print">
+                                        <polyline fill="none" stroke="#000"
+                                            points="4.5 13.5 1.5 13.5 1.5 6.5 18.5 6.5 18.5 13.5 15.5 13.5"></polyline>
+                                        <polyline fill="none" stroke="#000" points="15.5 6.5 15.5 2.5 4.5 2.5 4.5 6.5">
+                                        </polyline>
+                                        <rect fill="none" stroke="#000" width="11" height="6" x="4.5" y="11.5"></rect>
+                                        <rect width="8" height="1" x="6" y="13"></rect>
+                                        <rect width="8" height="1" x="6" y="15"></rect>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- End of Recipe image and detail section -->
+
+    <!-- Ingridients and cooking steps section  -->
+    <section>
+        <div class="ingridients-container">
+            <div class="ingredients-grid">
+                <div class="cooking-steps">
+                    <div class="cooking-article">
+                        <h3>How to Make It</h3>
+                        <div id="step-1" class="step-grid">
+                            <div class="step-icon">
+                                <span class="step" onclick="fadeText()"><svg width="16" height="16" viewBox="0 0 20 20"
+                                        style="color: red;" xmlns="http://www.w3.org/2000/svg" data-svg="check">
+                                        <polyline fill="none" stroke="#000" stroke-width="1.1" points="4,10 8,15 17,4">
+                                        </polyline>
+                                    </svg></span>
+                            </div>
+                            <div class="uk-width-expand">
+                                <h5 class="uk-step-title">1. Step</h5>
+                                <div class="step-content">
+                                    Labour, of evaluated would he the a the our what is in the
+                                    arduous sides behavioural is which the
+                                    have didn't kicked records the it framework by the for traveler sure the can
+                                    most
+                                    well her.
+                                    Entered have break himself cheek, and activity, for bit of text.</div>
+                            </div>
+                        </div>
+                        <div id="step-1" class="step-grid">
+                            <div class="step-icon">
+                                <span class="step" onclick="fadeText()"><svg width="16" height="16" viewBox="0 0 20 20"
+                                        style="color: red;" xmlns="http://www.w3.org/2000/svg" data-svg="check">
+                                        <polyline fill="none" stroke="#000" stroke-width="1.1" points="4,10 8,15 17,4">
+                                        </polyline>
+                                    </svg></span>
+                            </div>
+                            <div class="uk-width-expand">
+                                <h5 class="uk-step-title">2. Step</h5>
+                                <div class="step-content">
+                                    Labour, of evaluated would he the a the our what is in the
+                                    arduous sides behavioural is which the
+                                    have didn't kicked records the it framework by the for traveler sure the can
+                                    most
+                                    well her.
+                                    Entered have break himself cheek, and activity, for bit of text.</div>
+                            </div>
+                        </div>
+                        <div id="step-1" class="step-grid">
+                            <div class="step-icon">
+                                <span class="step" onclick="fadeText()"><svg width="16" height="16" viewBox="0 0 20 20"
+                                        style="color: red;" xmlns="http://www.w3.org/2000/svg" data-svg="check">
+                                        <polyline fill="none" stroke="#000" stroke-width="1.1" points="4,10 8,15 17,4">
+                                        </polyline>
+                                    </svg></span>
+                            </div>
+                            <div class="uk-width-expand">
+                                <h5 class="uk-step-title">3. Step</h5>
+                                <div class="step-content">
+                                    Labour, of evaluated would he the a the our what is in the
+                                    arduous sides behavioural is which the
+                                    have didn't kicked records the it framework by the for traveler sure the can
+                                    most
+                                    well her.
+                                    Entered have break himself cheek, and activity, for bit of text.</div>
+                            </div>
+                        </div>
+
+                        <hr style="border: 1px solid black;">
+                        <h3>Comments</h3>
+                        <ul class="uk-comment-list uk-margin-medium-top">
+                            <li>
+                                <article class="uk-comment uk-visible-toggle" tabindex="-1">
+                                    <header class="uk-comment-header uk-position-relative">
+                                        <div class="uk-grid-medium uk-flex-middle" data-uk-grid>
+                                            <div class="uk-width-auto">
+                                                <img class="uk-comment-avatar uk-border-circle"
+                                                    src="https://source.unsplash.com/EGVccebWodM/100x100" width="50"
+                                                    height="50" alt="Alice Thomson">
+                                            </div>
+                                            <div class="uk-width-expand">
+                                                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset"
+                                                        href="recipe.html#">Alice
+                                                        Thomson</a></h4>
+                                                <p class="uk-comment-meta uk-margin-remove"><a class="uk-link-reset"
+                                                        href="recipe.html#">12 days
+                                                        ago</a></p>
+                                                <div class="uk-rating">
+                                                    <span class="uk-rating-filled"
+                                                        data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                    <span class="uk-rating-filled"
+                                                        data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                    <span class="uk-rating-filled"
+                                                        data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                    <span class="uk-rating-filled"
+                                                        data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                    <span data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="uk-position-top-right uk-position-small uk-hidden-hover"><a
+                                                class="uk-link-muted" href="recipe.html#">Reply</a>
+                                        </div>
+                                    </header>
+                                    <div class="uk-comment-body">
+                                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+                                            nonumy
+                                            eirmod tempor invidunt ut labore et
+                                            dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                                            accusam et
+                                            justo duo dolores et ea rebum. Stet
+                                            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
+                                            sit
+                                            amet.</p>
+                                    </div>
+                                </article>
+                                <ul>
+                                    <li>
+                                        <article
+                                            class="uk-comment uk-comment-primary uk-visible-toggle uk-border-rounded"
+                                            tabindex="-1">
+                                            <header class="uk-comment-header uk-position-relative">
+                                                <div class="uk-grid-medium uk-flex-middle" data-uk-grid>
+                                                    <div class="uk-width-auto">
+                                                        <img class="uk-comment-avatar uk-border-circle"
+                                                            src="https://source.unsplash.com/eSjmZW97cH8/100x100"
+                                                            width="50" height="50" alt="Tom Solender">
+                                                    </div>
+                                                    <div class="uk-width-expand">
+                                                        <h4 class="uk-comment-title uk-margin-remove"><a
+                                                                class="uk-link-reset" href="recipe.html#">Tom
+                                                                Solender</a></h4>
+                                                        <p class="uk-comment-meta uk-margin-remove-top"><a
+                                                                class="uk-link-reset" href="recipe.html#">12
+                                                                days
+                                                                ago</a></p>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-position-top-right uk-position-small uk-hidden-hover">
+                                                    <a class="uk-link-muted" href="recipe.html#">Reply</a>
+                                                </div>
+                                            </header>
+                                            <div class="uk-comment-body">
+                                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                                                    diam
+                                                    nonumy eirmod tempor invidunt ut labore
+                                                    et dolore magna aliquyam erat, sed diam voluptua. At vero
+                                                    eos et
+                                                    accusam et justo duo dolores et ea rebum.
+                                                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+                                                    ipsum
+                                                    dolor sit amet.</p>
+                                            </div>
+                                        </article>
+                                    </li>
+                                    <li>
+                                        <article class="uk-comment uk-visible-toggle" tabindex="-1">
+                                            <header class="uk-comment-header uk-position-relative">
+                                                <div class="uk-grid-medium uk-flex-middle" data-uk-grid>
+                                                    <div class="uk-width-auto">
+                                                        <img class="uk-comment-avatar uk-border-circle"
+                                                            src="https://source.unsplash.com/EGVccebWodM/100x100"
+                                                            width="50" height="50" alt="Alice Thomson">
+                                                    </div>
+                                                    <div class="uk-width-expand">
+                                                        <h4 class="uk-comment-title uk-margin-remove"><a
+                                                                class="uk-link-reset" href="recipe.html#">Alice
+                                                                Thomson</a></h4>
+                                                        <p class="uk-comment-meta uk-margin-remove"><a
+                                                                class="uk-link-reset" href="recipe.html#">12
+                                                                days
+                                                                ago</a></p>
+                                                        <div class="uk-rating">
+                                                            <span class="uk-rating-filled"
+                                                                data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                            <span class="uk-rating-filled"
+                                                                data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                            <span class="uk-rating-filled"
+                                                                data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                            <span class="uk-rating-filled"
+                                                                data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                            <span data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-position-top-right uk-position-small uk-hidden-hover">
+                                                    <a class="uk-link-muted" href="recipe.html#">Reply</a>
+                                                </div>
+                                            </header>
+                                            <div class="uk-comment-body">
+                                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                                                    diam
+                                                    nonumy eirmod tempor invidunt ut labore
+                                                    et dolore magna aliquyam erat, sed diam voluptua. At vero
+                                                    eos et
+                                                    accusam et justo duo dolores et ea rebum.
+                                                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+                                                    ipsum
+                                                    dolor sit amet.</p>
+                                            </div>
+                                        </article>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ingredients">
+                    <h3>Ingredients</h3>
+                    <ul class="custom-list">
+                        <li>1 pound fresh prepared pizza dough</li>
+                        <li>6 ounces shredded mozzarella cheese</li>
+                        <li>3/4 cup of ricotta cheese</li>
+                        <li>1 large egg yolk</li>
+                        <li>1/2 teaspoon lemon zest</li>
+                        <li>2 finely grated garlic cloves</li>
+                        <li>1/2 teaspoon kosher salt</li>
+                        <li>1/4 teaspoon black pepper</li>
+                        <li>1 large egg</li>
+                        <li>1 teaspoon dried Italian seasoning</li>
+                    </ul>
+                    <h3 class="uk-margin-large-top">Share Recipe</h3>
+                    <div class="uk-margin-medium-top">
+                        <div data-uk-grid class="uk-child-width-auto uk-grid-small">
+                            <div>
+                                <a href="recipe.html#" data-uk-icon="icon: facebook; ratio: 0.9"
+                                    class="uk-icon-button facebook" target="_blank"></a>
+                            </div>
+                            <div>
+                                <a href="recipe.html#" data-uk-icon="icon: linkedin; ratio: 0.9"
+                                    class="uk-icon-button linkedin" target="_blank"></a>
+                            </div>
+                            <div>
+                                <a href="recipe.html#" data-uk-icon="icon: twitter; ratio: 0.9"
+                                    class="uk-icon-button twitter" target="_blank"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!--End of Ingridients and cooking steps section  -->
+
+    <!-- Other recipes section  -->
+    
+    <!--End of other Other recipes section  -->
+
+
+    <!-- Footer section -->
+    <footer class="footer">
+        <div id="mainFooter">
+            <!--start of logo-->
+            <div class="logo">
+                <h2>FlavorRover</h2>
+            </div>
+            <!--End of logo-->
+
+            <!--start of footer nav links-->
+            <nav class="footer-nav">
+                <a href="https://web.facebook.com/home.php">
+                    <svg width="30" height="30" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="Facebook">
+                            <path id="facebook" fill-rule="evenodd" clip-rule="evenodd"
+                                d="M30 0C13.4315 0 0 13.4315 0 30C0 46.5685 13.4315 60 30 60C46.5685 60 60 46.5685 60 30C60 13.4315 46.5685 0 30 0ZM32.1269 30.3178V46.6393H25.3738V30.3184H22V24.6939H25.3738V21.317C25.3738 16.7285 27.2789 14 32.6915 14H37.1976V19.6251H34.381C32.274 19.6251 32.1346 20.4112 32.1346 21.8781L32.1269 24.6933H37.2295L36.6324 30.3178H32.1269Z"
+                                fill="white" />
+                        </g>
+                    </svg>
+
+                </a>
+                <a href="https://twitter.com/home">
+                    <svg width="30" height="30" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="Twitter">
+                            <path id="twitter" fill-rule="evenodd" clip-rule="evenodd"
+                                d="M30 0C13.4315 0 0 13.4315 0 30C0 46.5685 13.4315 60 30 60C46.5685 60 60 46.5685 60 30C60 13.4315 46.5685 0 30 0ZM29.1645 25.4224L29.1015 24.3844C28.9126 21.6939 30.5704 19.2364 33.1935 18.2831C34.1587 17.9441 35.7955 17.9017 36.8657 18.1983C37.2854 18.3255 38.0828 18.7492 38.6494 19.1305L39.6776 19.8296L40.8108 19.4694C41.4403 19.2788 42.2797 18.961 42.6574 18.7492C43.0141 18.5585 43.3289 18.4526 43.3289 18.5161C43.3289 18.8763 42.5525 20.105 41.902 20.7829C41.0206 21.7362 41.2724 21.821 43.0561 21.1854C44.1263 20.8253 44.1473 20.8253 43.9375 21.2278C43.8116 21.4397 43.161 22.1811 42.4686 22.8591C41.2934 24.0242 41.2305 24.1513 41.2305 25.1259C41.2305 26.63 40.517 29.7654 39.8035 31.4814C38.4815 34.7015 35.6486 38.0275 32.8157 39.7012C28.8287 42.0527 23.5197 42.6459 19.05 41.2689C17.5601 40.8028 15 39.6164 15 39.4046C15 39.341 15.7764 39.2563 16.7207 39.2351C18.6933 39.1927 20.6658 38.6419 22.3445 37.6674L23.4777 36.9895L22.1767 36.5446C20.33 35.909 18.6723 34.4473 18.2526 33.0702C18.1267 32.6254 18.1686 32.6042 19.3438 32.6042L20.5609 32.583L19.5326 32.0957C18.3155 31.4814 17.2034 30.4433 16.6578 29.384C16.2591 28.6214 15.7554 26.6935 15.9023 26.5452C15.9443 26.4817 16.385 26.6088 16.8886 26.7783C18.3365 27.3079 18.5254 27.1808 17.686 26.291C16.1122 24.681 15.6295 22.2871 16.385 20.0203L16.7417 19.0034L18.1267 20.3804C20.9596 23.1556 24.2961 24.8081 28.1152 25.2953L29.1645 25.4224Z"
+                                fill="white" />
+                        </g>
+                    </svg>
+
+                </a>
+                <a href="https://www.instagram.com/">
+                    <svg width="30" height="30" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="Instagram">
+                            <path id="instagram" fill-rule="evenodd" clip-rule="evenodd"
+                                d="M30 0C13.4315 0 0 13.4315 0 30C0 46.5685 13.4315 60 30 60C46.5685 60 60 46.5685 60 30C60 13.4315 46.5685 0 30 0ZM23.4041 14.0967C25.1108 14.019 25.6561 14 30.0015 14H29.9965C34.3432 14 34.8866 14.019 36.5932 14.0967C38.2966 14.1747 39.4599 14.4443 40.4799 14.84C41.5333 15.2483 42.4233 15.795 43.3133 16.685C44.2033 17.5744 44.75 18.467 45.16 19.5194C45.5533 20.5367 45.8233 21.6994 45.9033 23.4028C45.98 25.1094 46 25.6548 46 30.0002C46 34.3455 45.98 34.8895 45.9033 36.5962C45.8233 38.2989 45.5533 39.4619 45.16 40.4796C44.75 41.5316 44.2033 42.4243 43.3133 43.3136C42.4243 44.2036 41.533 44.7517 40.4809 45.1603C39.4629 45.556 38.2989 45.8257 36.5956 45.9037C34.8889 45.9813 34.3452 46.0003 29.9995 46.0003C25.6545 46.0003 25.1094 45.9813 23.4028 45.9037C21.6997 45.8257 20.5367 45.556 19.5187 45.1603C18.467 44.7517 17.5744 44.2036 16.6854 43.3136C15.7957 42.4243 15.249 41.5316 14.84 40.4793C14.4447 39.4619 14.175 38.2993 14.0967 36.5959C14.0193 34.8892 14 34.3455 14 30.0002C14 25.6548 14.02 25.1091 14.0963 23.4024C14.173 21.6997 14.443 20.5367 14.8397 19.5191C15.2497 18.467 15.7964 17.5744 16.6864 16.685C17.5757 15.7954 18.4684 15.2487 19.5207 14.84C20.5381 14.4443 21.7007 14.1747 23.4041 14.0967ZM28.5662 16.8834C28.8449 16.8829 29.1447 16.8831 29.4682 16.8832L30.0015 16.8834C34.2735 16.8834 34.7799 16.8987 36.4669 16.9754C38.0269 17.0467 38.8736 17.3074 39.4376 17.5264C40.1843 17.8164 40.7166 18.163 41.2763 18.723C41.8363 19.2831 42.183 19.8164 42.4736 20.5631C42.6926 21.1264 42.9536 21.9731 43.0246 23.5331C43.1013 25.2198 43.118 25.7265 43.118 29.9965C43.118 34.2665 43.1013 34.7732 43.0246 36.4599C42.9533 38.0199 42.6926 38.8666 42.4736 39.4299C42.1836 40.1766 41.8363 40.7083 41.2763 41.268C40.7163 41.828 40.1846 42.1746 39.4376 42.4646C38.8743 42.6846 38.0269 42.9446 36.4669 43.016C34.7802 43.0926 34.2735 43.1093 30.0015 43.1093C25.7291 43.1093 25.2228 43.0926 23.5361 43.016C21.9761 42.944 21.1294 42.6833 20.5651 42.4643C19.8184 42.1743 19.2851 41.8276 18.725 41.2676C18.165 40.7076 17.8184 40.1756 17.5277 39.4286C17.3087 38.8653 17.0477 38.0186 16.9767 36.4586C16.9 34.7719 16.8847 34.2652 16.8847 29.9925C16.8847 25.7198 16.9 25.2158 16.9767 23.5291C17.048 21.9691 17.3087 21.1224 17.5277 20.5584C17.8177 19.8117 18.165 19.2784 18.725 18.7184C19.2851 18.1584 19.8184 17.8117 20.5651 17.521C21.1291 17.301 21.9761 17.041 23.5361 16.9694C25.0121 16.9027 25.5841 16.8827 28.5662 16.8794V16.8834ZM38.5423 19.5401C37.4822 19.5401 36.6222 20.3991 36.6222 21.4594C36.6222 22.5194 37.4822 23.3794 38.5423 23.3794C39.6023 23.3794 40.4623 22.5194 40.4623 21.4594C40.4623 20.3994 39.6023 19.5394 38.5423 19.5394V19.5401ZM21.7847 30.0002C21.7847 25.4626 25.4636 21.7836 30.0012 21.7834C34.5389 21.7834 38.2169 25.4625 38.2169 30.0002C38.2169 34.5379 34.5392 38.2153 30.0015 38.2153C25.4638 38.2153 21.7847 34.5379 21.7847 30.0002ZM35.3349 30.0002C35.3349 27.0545 32.9469 24.6668 30.0015 24.6668C27.0558 24.6668 24.6681 27.0545 24.6681 30.0002C24.6681 32.9455 27.0558 35.3336 30.0015 35.3336C32.9469 35.3336 35.3349 32.9455 35.3349 30.0002Z"
+                                fill="white" />
+                        </g>
+                    </svg>
+
+                </a>
+            </nav>
+            <!--End of footer nav links-->
+        </div>
+        <p>©FlavorRover 2023</p>
+    </footer>
+
+    <!-- End of Footer section -->
+
+
+    <!-- JS Scripts -->
+    <script src="{{ url_for('static', filename ='js/index.js') }}"></script>
+
+    <!-- Add Bootstrap JavaScript and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    <!-- End of js scripts -->
+</body>
+
+</html>
