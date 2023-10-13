@@ -248,7 +248,7 @@ header {
 
 .nav-menu {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   gap: 20px;
 }
@@ -256,56 +256,19 @@ header {
 .nav-menu a {
   text-decoration: none;
   padding: 0.5rem 0;
-  color: var(--color-white);
-  font-size: 18px;
-  font-weight: 400;
+  color: rgb(252, 249, 249);
+  font-size: 19px;
+  font-weight: 600;
   font-family: ubuntu;
 }
 .nav-menu a:hover {
   color: rgba(235, 74, 54, 1);
 }
 
-.right-menu {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.right-menu a:hover {
-  color: rgba(235, 74, 54, 1);
-}
-
-.right-menu a {
-  text-decoration: none;
-  padding: 0.5rem 0;
-  color: var(--color-white);
-  font-size: 18px;
-  font-weight: 400;
-  font-family: ubuntu;
-}
-.right-menu input {
-  border: 0;
-  border-radius: 5px;
-}
-
-.right-menu button {
-  background-color: rgba(235, 74, 54, 1);
-  height: 40px;
-  width: 150px;
-  border: 0;
-  border-radius: 30px;
-  color: #ffffff;
-  opacity: 0.9;
-}
-
-.right-menu button:hover {
-  opacity: 0.7;
-}
-
 /* MAIN SECTION */
 main {
-  height: 850px;
-  background-image: url("/static/images/background.jpg");
+  height: 300px;
+  background-image: url("/static/images/recipe-detail.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -318,95 +281,188 @@ main {
   color: #ffffff;
 }
 
-.body-section{
+main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0; 
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25); /* Adjust the last value for darkness (0.5 is semi-transparent)*/
+  z-index: 1; /* Place the overlay above the background image */
+  pointer-events: none; /* Allows interaction with the content beneath */
+}
+
+/* RECIPE DETAILS AND IMAGE SECTION */
+.recipe-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.recipe-image img {
+  border-radius: 7px;
+}
+.recipe-text {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recipe-details h1 {
+  font-size: 2.23125rem;
+  line-height: 1.2;
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  font-family: "Montserrat", san-serif;
+  font-weight: 600;
+  color: #000;
+  text-transform: none;
+  text-align: center;
+}
+.recipe-details p {
+  font-family: "Ubuntu";
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  background: #fff;
+  color: #4a4a4a;
+  text-align: justify;
+}
+
+.data-grid{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 10px;
+  margin-top: 50px;
+  height: 200px;
+}
+
+.col-1{
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
-}
-
-.body-text {
-  color: #ffffff;
-  margin-top: 70px;
+  justify-content: center;
   text-align: center;
+  flex-grow: 1;
+  padding: 10px;
+  max-width: 25%;
+}
+.uk-text-head{
+  font-weight: 400;margin: 10px;
+}
+.uk-text{
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+  background: #fff;
+  color: #4a4a4a;
+  text-align: justify;
 }
 
-#heading {
-  font-size: 60px;
-  font-family: var(--font-family-title);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
+/* INGRIDIENTS AND COOKING STEPS SECTION */
 
-#para {
-  font-size: 20px;
-  font-family: Ubuntu;
-  color: whitesmoke;
-}
-#signup-today {
-  margin: 0 auto;
-  background-color: rgba(235, 74, 54, 1);
-  height: 52px;
-  width: 180px;
-  border: 0;
-  border-radius: 30px;
-  color: #ffffff;
-  opacity: 0.9;
-  margin-top: 30px;
-  text-transform: capitalize;
-}
-
-.recipes {
+.ingredients-grid {
   display: flex;
-  gap: 2%;
-  padding: 20px;
-  font-family: "Leckerli One", cursive;
-  font-size: 18px;
   flex-wrap: wrap;
 }
-.recipes-lists {
+
+.cooking-steps {
+  flex: 2; /* Occupies 2/3 of the width */
+  padding: 20px; /* Adjust the spacing as needed */
+}
+
+.ingredients {
+  flex: 1; /* Occupies 1/3 of the width */
+  padding: 20px; /* Adjust the spacing as needed */
+  background-color: #f0f0f0; /* Example background color */
+  border-radius: 7px;
+}
+.custom-list {
+  list-style: none;
+  padding: 0;
+}
+
+.custom-list li {
+  font-size: 16px; /* Adjust the font size as needed */
+  font-family: Arial, sans-serif; /* Adjust the font family as needed */
+  margin-top: 30px;
+  padding: 5px;
+  border-bottom: 1px solid #777474; /* Horizontal line after each list item */
+}
+
+
+.step-grid{
   display: flex;
-  flex-direction: column;
-  flex: 1;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 15px;
 }
 
-.collapsible-list {
-  list-style: none;
-  padding: 0;
-  text-align: left;
-  width: 300px;
+.step-icon {
+  display: inline-block;
+  position: relative;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 0.3s;
+  text-align: center;
+  border: 1px solid red;
 }
 
-.expandable {
-  margin-bottom: 10px; /* Adjust the margin as needed */
-  text-align: left;
-}
-.sublist {
-  list-style: none;
-  padding: 0;
-}
-.icon {
-  padding-left: 100px;
-  font-weight: var(--font-weight-bold);
-}
-.sublist{
-  padding-left: 20px;
-  display: none;
-  font-family: "Leckerli One", cursive;
-  font-size: 16px;
-  margin-bottom: 5px;
-  color:#353535;
-}
-a {
+.step-icon a {
+  display: block;
+  width: 100%;
+  height: 100%;
   text-decoration: none;
-  color: #030303;
-  font-family: Ubuntu;
 }
 
+.step-icon:hover {
+  background-color: rgba(235, 74, 54, 1); /* Change the color on hover */
+}
+.cooking-article h3{
+  font-size: 2.23125rem;
+  line-height: 1.2;
+  display: block;
+  font-size: 1.8em;
+  font-weight: bold;
+  font-family: "ubuntu", san-serif;
+  font-weight: 500;
+  color: #000;
+  text-transform: none;
+  text-align: left;
+}
+.uk-step-title{
+  font-size: 2.23125rem;
+  line-height: 1.2;
+  display: block;
+  font-size: 1.4em;
+  font-weight: bold;
+  font-family: "ubuntu", san-serif;
+  font-weight: 500;
+  color: rgba(235, 74, 54, 1);
+  text-transform: none;
+  text-align: left;
+}
+.step-content{
+  font-family: "Ubuntu";
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  background: #fff;
+  color: #4a4a4a;
+  text-align: justify;
+}
+
+/* ALL RECIPES COLUMN */
 .recipe-column {
   display: flex;
   flex-direction: column;
   flex: 3;
 }
+
 
 .filter-section {
   display: flex; /* Use Flexbox */
@@ -416,7 +472,7 @@ a {
   flex-wrap: wrap;
 }
 
-.search{
+.search {
   background-color: #f0f0f0;
   border: none;
   height: 40px;
@@ -445,7 +501,6 @@ a {
   justify-content: center;
   align-items: center;
 }
-
 
 /* Style the card container */
 .uk-card {
@@ -493,13 +548,13 @@ a {
 .rating-icon {
   width: 16px;
   height: 16px;
-  background: url('path-to-rating-icon.png') center center no-repeat; /* Replace with your rating icon image */
+  background: url("path-to-rating-icon.png") center center no-repeat; /* Replace with your rating icon image */
   background-size: cover;
   margin-right: 5px; /* Adjust the spacing */
 }
 
 /* FOOTER SECTION */
-.footer{
+.footer {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -507,13 +562,11 @@ a {
   color: var(--color-white);
   flex-wrap: wrap;
 }
-.footer p{
-text-align: center;
-
+.footer p {
+  text-align: center;
 }
 
 #mainFooter {
-  
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -527,3 +580,15 @@ text-align: center;
   gap: 10px;
 }
 
+
+@media (max-width: 768px) {
+  main::before {
+    background-color: rgba(0, 0, 0, 0.4); /* Make the overlay darker for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  main::before {
+    background-color: rgba(0, 0, 0, 0.4); /* Further darken the overlay for even smaller screens */
+  }
+}
