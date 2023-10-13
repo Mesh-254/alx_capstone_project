@@ -285,10 +285,15 @@ main::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 0; 
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.25); /* Adjust the last value for darkness (0.5 is semi-transparent)*/
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.25
+  ); /* Adjust the last value for darkness (0.5 is semi-transparent)*/
   z-index: 1; /* Place the overlay above the background image */
   pointer-events: none; /* Allows interaction with the content beneath */
 }
@@ -332,7 +337,7 @@ main::before {
   text-align: justify;
 }
 
-.data-grid{
+.data-grid {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -341,7 +346,7 @@ main::before {
   height: 200px;
 }
 
-.col-1{
+.col-1 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -351,10 +356,11 @@ main::before {
   padding: 10px;
   max-width: 25%;
 }
-.uk-text-head{
-  font-weight: 400;margin: 10px;
+.uk-text-head {
+  font-weight: 400;
+  margin: 10px;
 }
-.uk-text{
+.uk-text {
   text-align: center;
   font-size: 16px;
   line-height: 1.5;
@@ -394,8 +400,7 @@ main::before {
   border-bottom: 1px solid #777474; /* Horizontal line after each list item */
 }
 
-
-.step-grid{
+.step-grid {
   display: flex;
   gap: 10px;
   align-items: flex-start;
@@ -422,7 +427,7 @@ main::before {
 .step-icon:hover {
   background-color: rgba(235, 74, 54, 1); /* Change the color on hover */
 }
-.cooking-article h3{
+.cooking-article h3 {
   font-size: 2.23125rem;
   line-height: 1.2;
   display: block;
@@ -434,7 +439,7 @@ main::before {
   text-transform: none;
   text-align: left;
 }
-.uk-step-title{
+.uk-step-title {
   font-size: 2.23125rem;
   line-height: 1.2;
   display: block;
@@ -446,7 +451,7 @@ main::before {
   text-transform: none;
   text-align: left;
 }
-.step-content{
+.step-content {
   font-family: "Ubuntu";
   font-size: 17px;
   font-weight: 400;
@@ -457,40 +462,24 @@ main::before {
 }
 
 /* ALL RECIPES COLUMN */
+.other-recipes h3{
+  font-size: 2.23125rem;
+  line-height: 1.2;
+  display: block;
+  font-size: 1.8em;
+  font-weight: bold;
+  font-family: "ubuntu", san-serif;
+  font-weight: 500;
+  color: #000;
+  text-transform: none;
+  text-align: left;
+}
 .recipe-column {
   display: flex;
   flex-direction: column;
   flex: 3;
-}
-
-
-.filter-section {
-  display: flex; /* Use Flexbox */
-  align-items: center; /* Align items vertically in the center */
-  justify-content: space-between;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-.search {
-  background-color: #f0f0f0;
-  border: none;
-  height: 40px;
-  border-radius: 5px;
-}
-
-.filter {
-  background-color: #f2f2f2; /* Background color */
-  border: 1px solid #ccc; /* Border style */
-  border-radius: 5px; /* Rounded corners */
-  color: #333; /* Text color */
-  padding: 5px; /* Padding inside the select box */
-}
-
-/* Style the options within the select */
-.filter option {
-  background-color: #fff; /* Background color for options */
-  color: #333; /* Text color for options */
+  margin-top: 50px;
+  background-color: ;
 }
 
 .recipe-items {
@@ -580,15 +569,24 @@ main::before {
   gap: 10px;
 }
 
-
 @media (max-width: 768px) {
   main::before {
-    background-color: rgba(0, 0, 0, 0.4); /* Make the overlay darker for smaller screens */
+    background-color: rgba(
+      0,
+      0,
+      0,
+      0.4
+    ); /* Make the overlay darker for smaller screens */
   }
 }
 
 @media (max-width: 480px) {
   main::before {
-    background-color: rgba(0, 0, 0, 0.4); /* Further darken the overlay for even smaller screens */
+    background-color: rgba(
+      0,
+      0,
+      0,
+      0.4
+    ); /* Further darken the overlay for even smaller screens */
   }
 }
