@@ -28,6 +28,11 @@ def login():
     """display login page"""
     return render_template('/user/login.html')
 
+@app.route('/detail')
+def recipe_detail():
+    """display login page"""
+    return render_template('/main/recipe-detail.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
