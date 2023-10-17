@@ -150,7 +150,7 @@
 
         <!-- Start of recipes list -->
         <div class="recipe-column">
-            <div class="search-column">
+            <!-- <div class="search-column">
                 <div class="filter-section">
                     <form class="search-form">
                         <span></span>
@@ -162,16 +162,18 @@
                         <option>Sort by: Trending</option>
                     </select>
                 </div>
-            </div>
-            {% if recipes%}
+            </div> -->
+
             <div class="recipe-items">
                 <!-- Recipe singe item -->
-                {% for recipe in recipes %}
+
                 <div class="recipe-item">
+                    {% if recipes%}
                     <div class="uk-card">
+                        {% for recipe in recipes %}
                         <div class="uk-card-media">
                             {% if recipe.image %}
-                            <img class="card-image" src="{{ recipe.image }}" alt="{{ recipe.title }}">
+                            <img class="card-image" src="{{ recipe.image }}" alt="{{ recipe.title }}" style="">
                             {% else %}
                             <p>No Image</p>
                             {% endif %}
@@ -185,9 +187,9 @@
                             </div>
                         </div>
                         <div>
-                            <a href="#">
-                                <h3 class="uk-card-title">{{recipe.title}}</h3>
-                            </a>
+
+                            <!-- <h3 class="uk-card-title">{{recipe.title}}</h3> -->
+
                             <div class="rating-section" data-uk-grid>
                                 <div class="uk-rating">
                                     <span class="rating-icon"></span>
@@ -197,13 +199,16 @@
                                 <div class="Name">by John Keller</div>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
+                    {% else %}
+                    <p>No recipes found.</p>
+                    {% endif %}
                 </div>
             </div>
-            {% else %}
-            <p>No recipes found.</p>
-            {% endfor %}
-            {% endif %}
+
+
+
         </div>
         <!-- End of recipes list -->
     </section>
