@@ -9,15 +9,17 @@ import os
 
 # import models tables
 from models.database import db
-from models.user import User
+# from models.user import User
+# from models.recipes import Recipes
+# from models.comments import Comments
 
+# import of blueprints 
+from blueprints.recipes import recipes
 
-
-# application 
+# application
 app = Flask(__name__, template_folder='./templates')
 
 app.url_map.strict_slashes = False
-
 
 
 # set up of the static folder correctly to serve static files.
@@ -34,7 +36,6 @@ DB_NAME = os.getenv('DB_NAME')
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 
-
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_SERVER}/{DB_NAME}"
 
@@ -43,19 +44,19 @@ db.app = app
 db.init_app(app)
 migrate = Migrate(app, db)
 
+# register blueprints
+app.register_blueprint(recipes,url_prefix='/')
+
 
 # login_manager = LoginManager()
 # login_manager.init_app(app)
 # login_manager.login_view = 'auth.login'
 
 
-
-
-
-@app.route('/')
-def index():
-    """display landing page"""
-    return render_template('/main/index.html')
+# @app.route('/')
+# def index():
+#     """display landing page"""
+#     return render_template('/main/index.html')
 
 
 @app.route('/base')
@@ -82,15 +83,5 @@ def recipe_detail():
     return render_template('/main/recipe-detail.html')
 
 
-
-def getlogindetails():
-    """Returns a list of user information"""
-    email = User.query.get('email')
-    if email not in session:
-        loggedIn = False
-    else:
-        loggedIn = True
-        username = User.query.get('username').filter_by(email=email).first()
-    return loggedIn, username
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=5000)
