@@ -233,7 +233,7 @@ header {
 
 .header-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   font-family: Ubuntu;
   flex-wrap: wrap;
@@ -277,7 +277,6 @@ header {
 
 .right-menu a {
   text-decoration: none;
-  padding: 0.5rem 0;
   color: var(--color-white);
   font-size: 18px;
   font-weight: 400;
@@ -288,7 +287,7 @@ header {
   border-radius: 5px;
 }
 
-.right-menu button {
+.right-menu button{
   background-color: rgba(235, 74, 54, 1);
   height: 40px;
   width: 150px;
@@ -318,7 +317,7 @@ main {
   color: #ffffff;
 }
 
-.body-section{
+.body-section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -388,13 +387,13 @@ main {
   padding-left: 100px;
   font-weight: var(--font-weight-bold);
 }
-.sublist{
+.sublist {
   padding-left: 20px;
   display: none;
   font-family: "Leckerli One", cursive;
   font-size: 16px;
   margin-bottom: 5px;
-  color:#353535;
+  color: #353535;
 }
 a {
   text-decoration: none;
@@ -416,7 +415,7 @@ a {
   flex-wrap: wrap;
 }
 
-.search{
+.search {
   background-color: #f0f0f0;
   border: none;
   height: 40px;
@@ -445,7 +444,6 @@ a {
   justify-content: center;
   align-items: center;
 }
-
 
 /* Style the card container */
 .uk-card {
@@ -493,13 +491,13 @@ a {
 .rating-icon {
   width: 16px;
   height: 16px;
-  background: url('path-to-rating-icon.png') center center no-repeat; /* Replace with your rating icon image */
+  background: url("path-to-rating-icon.png") center center no-repeat; /* Replace with your rating icon image */
   background-size: cover;
   margin-right: 5px; /* Adjust the spacing */
 }
 
 /* FOOTER SECTION */
-.footer{
+.footer {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -507,13 +505,11 @@ a {
   color: var(--color-white);
   flex-wrap: wrap;
 }
-.footer p{
-text-align: center;
-
+.footer p {
+  text-align: center;
 }
 
 #mainFooter {
-  
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -526,4 +522,3 @@ text-align: center;
   color: var(--color-white);
   gap: 10px;
 }
-
