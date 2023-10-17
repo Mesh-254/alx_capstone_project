@@ -36,6 +36,7 @@ def index():
     decoded_search_query = unquote(search_query)
     # Perform a search for recipes with the decoded search query
     recipes = search_recipes(decoded_search_query)
+    print(recipes)
     # Render the main page
     return render_template('main/index.html', recipes=recipes, search_query=decoded_search_query)
 
@@ -45,7 +46,7 @@ def search_recipes(query):
     params = {
         'apiKey': API_KEY,
         'query': query,
-        'number': 30,
+        'number': 40,
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
