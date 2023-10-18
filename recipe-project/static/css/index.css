@@ -301,6 +301,43 @@ header {
   opacity: 0.7;
 }
 
+/* Style the text of mobile menu items to be white */
+.mobile-menu{
+  display: none;
+}
+.mobile-menu li a {
+  color: white;
+}
+
+.mobile-menu {
+  list-style: none;
+}
+/* Style the "X" icon */
+.close {
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+}
+
+/* Hide the close icon initially */
+.close {
+  display: none;
+}
+
+/* Mobile menu styles */
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+}
+
+.menu-toggle .bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
 /* MAIN SECTION */
 main {
   height: 850px;
@@ -500,5 +537,41 @@ a {
     max-width: 100%; /* Full-width cards on smaller screens */
     margin-right: 0; /* No margin on the right to avoid unnecessary spacing */
     margin-left: 0; /* No margin on the left to avoid unnecessary spacing */
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-toggle {
+      display: block;
+  }
+
+  .nav-menu {
+      display: none;
+  }
+
+  .right-menu {
+      display: none;
+  }
+
+  .menu-open .bar {
+      transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .menu-open .bar:nth-child(2) {
+      opacity: 0;
+  }
+
+  .menu-open .bar:last-child {
+      transform: rotate(45deg) translate(-5px, -6px);
+  }
+
+  .menu-open .close {
+      display: block;
+  }
+
+  .menu-open .mobile-menu {
+      display: block;
+      list-style: none; /* Remove list bullets */
+      padding: 0;
   }
 }
