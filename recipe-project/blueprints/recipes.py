@@ -2,7 +2,8 @@
 from flask import *
 
 from flask.cli import load_dotenv
-import os, requests
+import os
+import requests
 from urllib.parse import unquote
 
 recipes = Blueprint('recipes', __name__)
@@ -13,7 +14,7 @@ env = load_dotenv()
 API_KEY = os.getenv('API_KEY')
 
 
-# render home route 
+# render home route
 @recipes.route('/home', methods=['GET'])
 def home():
     # Render the main page with empty recipe list and search query
@@ -30,7 +31,7 @@ def index():
         recipes = search_recipes(query)
         # Render the main page with the search results and the search query
         return render_template('main/index.html', recipes=recipes, search_query=query)
-    
+
     # If it's a GET request or no form submitted
     search_query = request.args.get('search_query', '')
     decoded_search_query = unquote(search_query)
@@ -40,6 +41,8 @@ def index():
     return render_template('main/index.html', recipes=recipes, search_query=decoded_search_query)
 
 # Function to search for recipes based on the provided query
+
+
 def search_recipes(query):
     url = f'https://api.spoonacular.com/recipes/complexSearch'
     params = {
@@ -63,6 +66,8 @@ def search_recipes(query):
     return []
 
 # Route to view a specific recipe with a given recipe ID
+
+
 @recipes.route('/recipe/<int:recipe_id>')
 def view_recipe(recipe_id):
     # Get the search query from the URL query parameters
@@ -83,22 +88,129 @@ def view_recipe(recipe_id):
 
 
 # function to show recipes for particular type
-@recipes.route('/recipe-type')
-def recipe_type():
-    """function to show different recipes"""
+@recipes.route('/recipe-dish-types')
+def recipe_dish_types():
+    """function to show different dish-types recipes"""
     recipes = []
     BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch'
+
+    # Combine dish types with a comma
+    DISH_TYPES = 'Cake, Bread, Candy,Fudge,Casserole'
+
     # Make a request to the Spoonacular API for each list name
     params = {
         'apiKey': API_KEY,
-        'query': 'Dish',
+        'query': 'dish',
         'number': 5,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
     }
     response = requests.get(BASE_URL, params=params)
-    if(response.status_code==200):
+    if (response.status_code == 200):
+        data = response.json()
+        recipes += data['results']
+
+    return render_template('main/recipes.html', recipes=recipes)
+
+
+# function to show recipes for particular type
+@recipes.route('/recipe-meal-types')
+def recipe_meal_types():
+    """function to show different meal-types recipes"""
+
+    recipes = []
+    BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch'
+    # Combine MEAL types with a comma
+    MEAL_TYPES = 'Breakfast, Brunch, Desserts, Dinners, Lunch'
+    for meal in MEAL_TYPES:
+
+        # Make a request to the Spoonacular API for each list name
+        params = {
+            'apiKey': API_KEY,
+            'query': meal,
+            'number': 5,  # You can adjust the number of recipes to retrieve
+            'instructionsRequired': True,
+            'addRecipeInformation': True,
+            'fillIngredients': True,
+        }
+        response = requests.get(BASE_URL, params=params)
+        if (response.status_code == 200):
+            data = response.json()
+            recipes += data['results']
+
+    return render_template('main/recipes.html', recipes=recipes)
+
+
+# function to show recipes for particular type
+@recipes.route('/recipe-diet-health')
+def recipe_diet_health():
+    """function to show diet&health recipes"""
+
+    recipes = []
+    BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch'
+
+    # Make a request to the Spoonacular API for each list name
+    params = {
+        'apiKey': API_KEY,
+        'query': 'Diet',
+        'number': 5,  # You can adjust the number of recipes to retrieve
+        'instructionsRequired': True,
+        'addRecipeInformation': True,
+        'fillIngredients': True,
+    }
+    response = requests.get(BASE_URL, params=params)
+    if (response.status_code == 200):
+        data = response.json()
+        recipes += data['results']
+
+    return render_template('main/recipes.html', recipes=recipes)
+
+
+# function to show recipes for particular type
+@recipes.route('/recipe-cuisine')
+def recipe_cuisine():
+    """function to show diet&health recipes"""
+
+    recipes = []
+    BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch'
+
+    # Make a request to the Spoonacular API for each list name
+    params = {
+        'apiKey': API_KEY,
+        'query': 'cuisine',
+        'number': 5,  # You can adjust the number of recipes to retrieve
+        'instructionsRequired': True,
+        'addRecipeInformation': True,
+        'fillIngredients': True,
+    }
+    response = requests.get(BASE_URL, params=params)
+    if (response.status_code == 200):
+        data = response.json()
+        recipes += data['results']
+
+    return render_template('main/recipes.html', recipes=recipes)
+
+
+# function to show recipes for particular type
+@recipes.route('/recipe-seasonal')
+def recipe_seasonal():
+    """function to show diet&health recipes"""
+
+    recipes = []
+    BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch'
+
+    # Make a request to the Spoonacular API for each list name
+    params = {
+        'apiKey': API_KEY,
+        'query': 'cuisine',
+        'number': 5,  # You can adjust the number of recipes to retrieve
+        'instructionsRequired': True,
+        'addRecipeInformation': True,
+        'fillIngredients': True,
+    }
+    response = requests.get(BASE_URL, params=params)
+    if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
 
