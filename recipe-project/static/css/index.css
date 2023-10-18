@@ -415,9 +415,11 @@ a {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 0 auto;
 }
 
 .uk-card {
+  flex: 1; /* Make each card take up an equal portion of the available space */
   max-width: calc(20% - 20px);
   margin-bottom: 20px;
   background-color: #f2f2f2;
@@ -481,4 +483,18 @@ a {
   display: flex;
   color: var(--color-white);
   gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .recipe-items {
+    flex-direction: column; /* Stack cards on top of each other */
+    align-items: center; /* Center-align the cards */
+  }
+
+  .uk-card {
+    flex: 1; /* Make each card take up an equal portion of the available space */
+    max-width: 100%; /* Full-width cards on smaller screens */
+    margin-right: 0; /* No margin on the right to avoid unnecessary spacing */
+    margin-left: 0; /* No margin on the left to avoid unnecessary spacing */
+  }
 }

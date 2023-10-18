@@ -80,3 +80,6 @@ def view_recipe(recipe_id):
         recipe = response.json()
         return render_template('main/recipe-detail.html', recipe=recipe, search_query=search_query)
     return "Recipe not found", 404
+
+
+# function to fetch 
