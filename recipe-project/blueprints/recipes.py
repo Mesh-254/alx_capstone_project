@@ -86,4 +86,20 @@ def view_recipe(recipe_id):
 @recipes.route('/recipe-type')
 def recipe_type():
     """function to show different recipes"""
-    return render_template('main/recipes.html')
+    recipes = []
+    BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch'
+    # Make a request to the Spoonacular API for each list name
+    params = {
+        'apiKey': API_KEY,
+        'query': 'Dish',
+        'number': 5,  # You can adjust the number of recipes to retrieve
+        'instructionsRequired': True,
+        'addRecipeInformation': True,
+        'fillIngredients': True,
+    }
+    response = requests.get(BASE_URL, params=params)
+    if(response.status_code==200):
+        data = response.json()
+        recipes += data['results']
+
+    return render_template('main/recipes.html', recipes=recipes)
