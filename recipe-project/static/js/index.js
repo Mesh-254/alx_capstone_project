@@ -23,11 +23,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // Fade text in detail page when step icon is clicked 
-const icon = document.getElementsByClassName('step');
-function fadeText() {
-    const para = document.getElementsByClassName('step-content');
-    icon.addEventListener('click', function(){
-        console.log('you clicked me')
-        para.style.opacity  = 0.2;
-    })
-}
+// Get all step-icon elements
+const icons = document.querySelectorAll('.step-icon');
+
+// Add a click event listener to each step-icon
+icons.forEach(icon => {
+    icon.addEventListener('click', function () {
+        // Get the associated step-content element
+        const stepContent = this.nextElementSibling;
+        // Add a class to adjust the position with CSS
+        stepContent.classList.add('fade-lower');
+    });
+});
+
+
+
+

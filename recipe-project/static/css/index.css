@@ -451,11 +451,15 @@ a {
 
 .view-item {
   text-decoration: none;
-  background-color: #007bff;
+  background-color: rgba(235, 74, 54, 1);
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
   margin-bottom: 20px;
+  opacity: 0.8;
+}
+.view-item:hover{
+  opacity: 1;
 }
 
 /* FOOTER SECTION */

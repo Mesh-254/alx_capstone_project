@@ -197,9 +197,18 @@
                         <!-- Instructions Section -->
                         <ol class="instruction-list">
                             {% for step in recipe.analyzedInstructions[0].steps %}
-                            <li>{{ step.step }}</li>
+                            <li class="step-item">
+                                <span class="step-icon" onclick="fadeText()">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" style="color: red;" xmlns="http://www.w3.org/2000/svg" data-svg="check">
+                                        <polyline fill="none" stroke="#000" stroke-width="1.1" points="4,10 8,15 17,4">
+                                        </polyline>
+                                    </svg>
+                                </span>
+                                <span class="step-content"> {{ step.number }}. {{ step.step }}</span>
+                            </li>
                             {% endfor %}
                         </ol>
+                        
                         <a href="/?search_query={{ search_query }}">Back to search results</a>
 
                         <hr style="border: 1px solid black;">

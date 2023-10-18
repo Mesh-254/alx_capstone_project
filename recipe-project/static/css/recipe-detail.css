@@ -415,6 +415,7 @@ main::before {
   transition: background-color 0.3s;
   text-align: center;
   border: 1px solid red;
+  margin-right: 10px;
 }
 
 .step-icon a {
@@ -426,6 +427,12 @@ main::before {
 
 .step-icon:hover {
   background-color: rgba(235, 74, 54, 1); /* Change the color on hover */
+}
+
+.step-icon svg {
+  fill: red; /* Customize the color of the SVG icon */
+  width: 16px; /* Set the width of the SVG icon */
+  height: 16px; /* Set the height of the SVG icon */
 }
 .cooking-article h3 {
   font-size: 2.23125rem;
@@ -451,6 +458,13 @@ main::before {
   text-transform: none;
   text-align: left;
 }
+.step-item {
+  list-style-type: none; /* Remove default list marker */
+  display: flex; /* Display list items as flex containers */
+  align-items: center; /* Center-align items vertically */
+  margin: 10px 0; /* Add spacing between list items */
+}
+
 .step-content {
   font-family: "Ubuntu";
   font-size: 17px;
@@ -459,6 +473,12 @@ main::before {
   background: #fff;
   color: #4a4a4a;
   text-align: justify;
+}
+
+.fade-lower {
+  opacity: 0.5;
+  transform: translateY(5px); /* Adjust the vertical position */
+  transition: transform 0.3s ease; /* Add a smooth transition effect */
 }
 
 /* ALL RECIPES COLUMN */
@@ -479,6 +499,7 @@ main::before {
   flex-direction: column;
   flex: 3;
   margin-top: 50px;
+
 }
 
 .recipe-items {
