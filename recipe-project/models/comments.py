@@ -1,4 +1,4 @@
-from models.database import db
+from .database import db
 
 
 class Comments(db.Model):

@@ -1,7 +1,9 @@
-from flask import *
+from flask import Flask, render_template, url_for
 from flask_migrate import Migrate
 from flask.cli import load_dotenv
 import os
+
+
 
 
 # flask login
@@ -11,10 +13,12 @@ import os
 from models.database import db
 # from models.user import User
 # from models.recipes import Recipes
-# from models.comments import Comments
+# from models.comments import Comments 
 
 # import of blueprints 
 from blueprints.recipes import recipes
+
+
 
 # application
 app = Flask(__name__, template_folder='./templates')
@@ -40,7 +44,6 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_SERVER}/{DB_NAME}"
 
 
-db.app = app
 db.init_app(app)
 migrate = Migrate(app, db)
 
@@ -48,15 +51,12 @@ migrate = Migrate(app, db)
 app.register_blueprint(recipes,url_prefix='/')
 
 
+
+
 # login_manager = LoginManager()
 # login_manager.init_app(app)
 # login_manager.login_view = 'auth.login'
 
-
-# @app.route('/')
-# def index():
-#     """display landing page"""
-#     return render_template('/main/index.html')
 
 
 @app.route('/base')

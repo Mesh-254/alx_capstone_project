@@ -356,6 +356,7 @@ main {
 
 .recipes {
   display: flex;
+  flex-direction: column;
   gap: 2%;
   padding: 20px;
   font-family: "Leckerli One", cursive;
@@ -364,17 +365,25 @@ main {
 }
 .recipes-lists {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   flex: 1;
 }
 
+.recipes-lists h2 {
+  text-align: center;
+}
 .collapsible-list {
+  display: flex;
+  justify-content: space-between;
   list-style: none;
   padding: 0;
   text-align: left;
-  width: 300px;
+  flex-wrap: wrap;
 }
-
+.list-heading {
+  font-weight: 500;
+}
 .expandable {
   margin-bottom: 10px; /* Adjust the margin as needed */
   text-align: left;
@@ -384,7 +393,8 @@ main {
   padding: 0;
 }
 .icon {
-  padding-left: 100px;
+  font-weight: 800;
+  padding-left: 20px;
   font-weight: var(--font-weight-bold);
 }
 .sublist {
@@ -400,100 +410,50 @@ a {
   color: #030303;
   font-family: Ubuntu;
 }
-
-.recipe-column {
-  display: flex;
-  flex-direction: column;
-  flex: 3;
-}
-
-.filter-section {
-  display: flex; /* Use Flexbox */
-  align-items: center; /* Align items vertically in the center */
-  justify-content: space-between;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-.search {
-  background-color: #f0f0f0;
-  border: none;
-  height: 40px;
-  border-radius: 5px;
-}
-
-.filter {
-  background-color: #f2f2f2; /* Background color */
-  border: 1px solid #ccc; /* Border style */
-  border-radius: 5px; /* Rounded corners */
-  color: #333; /* Text color */
-  padding: 5px; /* Padding inside the select box */
-}
-
-/* Style the options within the select */
-.filter option {
-  background-color: #fff; /* Background color for options */
-  color: #333; /* Text color for options */
-}
-
+/* RECIPE ITEMS SECTION */
 .recipe-items {
   display: flex;
-  gap: 10px;
-  flex: 1;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
 }
 
-/* Style the card container */
 .uk-card {
-  border: 1px solid #e1e1e1; /* Add a border */
-  border-radius: 10px; /* Add border radius for rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-  margin-bottom: 20px; /* Add margin to separate cards */
+  max-width: calc(20% - 20px);
+  margin-bottom: 20px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
   position: relative;
-  overflow: hidden; /* Ensure the container clips its children */
+  border-radius: 10px; /* Apply border radius to the card */
+  overflow: hidden; /* Hide content overflow */
 }
 
-/* Style the image and container */
-.card-image {
-  width: 100%;
-  height: auto;
-  border-radius: 10px 10px 0 0; /* Rounded corners only for the top of the image */
+.uk-card img {
+  max-width: 100%; /* Make the image responsive */
+  border-radius: 10px 10px 0 0; /* Apply border radius to the image */
 }
 
-.uk-card .uk-card-media {
-  position: relative;
-  overflow: hidden; /* Ensure the image doesn't overflow the container */
-}
-/* Position the heart icon in the top-right corner */
 .heart-icon {
   position: absolute;
-  top: 10px; /* Adjust the top position as needed */
-  right: 10px; /* Adjust the right position as needed */
-  z-index: 2; /* To place it on top of the card image */
-  cursor: pointer; /* Add a pointer cursor for interaction */
+  top: 10px;
+  right: 10px;
 }
 
-/* Style the title */
 .uk-card-title {
-  padding: 20px; /* Add padding to the title */
-  font-size: 18px; /* Adjust the font size */
+  font-size: 13px;
+  margin: 10px; /* Add some margin around the title */
+  text-wrap: wrap;
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add an ellipsis (...) for overflow text */
 }
 
-.uk-rating {
-  display: flex;
-  align-items: center;
-  font-size: 14px; /* Adjust the font size */
-  color: #888; /* Adjust the color */
-}
-
-.rating-icon {
-  width: 16px;
-  height: 16px;
-  background: url("path-to-rating-icon.png") center center no-repeat; /* Replace with your rating icon image */
-  background-size: cover;
-  margin-right: 5px; /* Adjust the spacing */
+.view-item {
+  text-decoration: none;
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 /* FOOTER SECTION */

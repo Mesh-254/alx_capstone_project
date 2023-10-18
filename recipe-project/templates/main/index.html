@@ -42,7 +42,7 @@
             <!--start of nav links-->
             <div>
                 <nav class="nav-menu">
-                    <a href="/">Home</a>
+                    <a href="/home">Home</a>
                     <a href="#">Search</a>
                     <a href="/detail">Recipe</a>
                     <a href="#">Contact</a>
@@ -88,7 +88,7 @@
             <h2>Recipes</h2>
             <ul class="collapsible-list">
                 <li class="expandable">
-                    <a href="index.html#">Dish Type</a>
+                    <a href="index.html#" class="list-heading">Dish Type</a>
                     <span class="icon">+</span>
                     <ul class="sublist">
                         <li><a href="#">Appetizers & Snacks</a></li>
@@ -96,16 +96,10 @@
                         <li><a href="#">Cake Recipes</a></li>
                         <li><a href="#">Candy and Fudge</a></li>
                         <li><a href="#">Casserole Recipes</a></li>
-                        <li><a href="#">Christmas Cookies</a></li>
-                        <li><a href="#">Cocktail Recipes</a></li>
-                        <li><a href="#">Main Dishes</a></li>
-                        <li><a href="#">Pasta Recipes</a></li>
-                        <li><a href="#">Pie Recipes</a></li>
-                        <li><a href="#">Sandwiches</a></li>
                     </ul>
                 </li>
                 <li class="expandable">
-                    <a href="index.html#">Meal Type</a>
+                    <a href="index.html#" class="list-heading">Meal Type</a>
                     <span class="icon">+</span>
                     <ul class="sublist">
                         <li><a href="index.html#">Breakfast and Brunch</a></li>
@@ -115,7 +109,7 @@
                     </ul>
                 </li>
                 <li class="expandable">
-                    <a href="index.html#">Diet & Health</a>
+                    <a href="index.html#" class="list-heading">Diet & Health</a>
                     <span class="icon">+</span>
                     <ul class="sublist">
                         <li><a href="index.html#">Diabetic</a></li>
@@ -125,7 +119,7 @@
                     </ul>
                 </li>
                 <li class="expandable">
-                    <a href="index.html#">World Cuisine</a>
+                    <a href="index.html#" class="list-heading">World Cuisine</a>
                     <span class="icon">+</span>
                     <ul class="sublist">
                         <li><a href="index.html#">Chinese</a></li>
@@ -135,7 +129,7 @@
                     </ul>
                 </li>
                 <li class="expandable">
-                    <a href="index.html#">Seasonal</a>
+                    <a href="index.html#" class="list-heading">Seasonal</a>
                     <span class="icon">+</span>
                     <ul class="sublist">
                         <li><a href="index.html#">Baby Shower</a></li>
@@ -149,71 +143,37 @@
         <!-- End of dish types list -->
 
         <!-- Start of recipes list -->
-        <div class="recipe-column">
-            <!-- <div class="search-column">
-                <div class="filter-section">
-                    <form class="search-form">
-                        <span></span>
-                        <input class="search" type="search" placeholder="Search for recipes...">
-                    </form>
-                    <select class="filter">
-                        <option>Sort by: Latest</option>
-                        <option>Sort by: Top Rated</option>
-                        <option>Sort by: Trending</option>
-                    </select>
-                </div>
-            </div> -->
 
-            <div class="recipe-items">
-                <!-- Recipe singe item -->
-
-                <div class="recipe-item">
-                    {% if recipes%}
-                    <div class="uk-card">
-                        {% for recipe in recipes %}
-                        <div class="uk-card-media">
-                            {% if recipe.image %}
-                            <img class="card-image" src="{{ recipe.image }}" alt="Recipe-Image">
-                            {% else %}
-                            <p>No Image</p>
-                            {% endif %}
-                            <div class="heart-icon">
-                                <svg width="30" height="30" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                    data-svg="heart">
-                                    <path fill="white" stroke="#000" stroke-width="0"
-                                        d="M10,4 C10,4 8.1,2 5.74,2 C3.38,2 1,3.55 1,6.73 C1,8.84 2.67,10.44 2.67,10.44 L10,18 L17.33,10.44 C17.33,10.44 19,8.84 19,6.73 C19,3.55 16.62,2 14.26,2 C11.9,2 10,4 10,4 L10,4 Z">
-                                    </path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div>
-
-                            <!-- <h3 class="uk-card-title">{{recipe.title}}</h3> -->
-
-                            <div class="rating-section" data-uk-grid>
-                                <div class="uk-rating">
-                                    <span class="rating-icon"></span>
-                                    <span class="rating">5.0</span>
-                                    <span>(73)</span>
-                                </div>
-                                <div class="Name">by John Keller</div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                    <p>No recipes found.</p>
-                    {% endif %}
-                </div>
-            </div>
-
-
-
-        </div>
         <!-- End of recipes list -->
     </section>
     <!-- End of Recipes section -->
-
+    <!-- Recipe items available -->
+    {% if recipes%}
+    <ul class="recipe-items">
+        {% for recipe in recipes %}
+        <li class="uk-card">
+            {% if recipe.image %}
+            <img src="{{ recipe.image }}" alt="{{ recipe.title }}" class=".card-image ">
+            <div class="heart-icon">
+                <a href="#"><svg width="30" height="30" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                        data-svg="heart">
+                        <path fill="white" stroke="#000" stroke-width="0"
+                            d="M10,4 C10,4 8.1,2 5.74,2 C3.38,2 1,3.55 1,6.73 C1,8.84 2.67,10.44 2.67,10.44 L10,18 L17.33,10.44 C17.33,10.44 19,8.84 19,6.73 C19,3.55 16.62,2 14.26,2 C11.9,2 10,4 10,4 L10,4 Z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+            {% endif %}
+            <h3 class="uk-card-title">{{ recipe.title }}</h3>
+            <a href="#" class="view-item">View</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <!-- If no recipes are found -->
+    {% else %}
+    <p>No recipes found.</p>
+    {% endif %}
+    <!-- End of recipe items -->
     <!-- Footer section -->
     <footer class="footer">
         <div id="mainFooter">
