@@ -354,10 +354,10 @@ main::before {
   text-align: center;
   flex-grow: 1;
   padding: 10px;
-  max-width: 25%;
+  max-width: 29%;
 }
 .uk-text-head {
-  font-weight: 400;
+  font-weight: 300;
   margin: 10px;
 }
 .uk-text {
@@ -479,7 +479,6 @@ main::before {
   flex-direction: column;
   flex: 3;
   margin-top: 50px;
-  background-color: ;
 }
 
 .recipe-items {
