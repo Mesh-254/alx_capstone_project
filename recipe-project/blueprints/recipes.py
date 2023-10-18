@@ -80,3 +80,10 @@ def view_recipe(recipe_id):
         recipe = response.json()
         return render_template('main/recipe-detail.html', recipe=recipe, search_query=search_query)
     return "Recipe not found", 404
+
+
+# function to show recipes for particular type
+@recipes.route('/recipe-type')
+def recipe_type():
+    """function to show different recipes"""
+    return render_template('main/recipes.html')
