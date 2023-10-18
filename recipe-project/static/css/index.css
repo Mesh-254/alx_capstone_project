@@ -452,11 +452,9 @@ a {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 0 auto;
 }
 
 .uk-card {
-  flex: 1; /* Make each card take up an equal portion of the available space */
   max-width: calc(20% - 20px);
   margin-bottom: 20px;
   border: 1px solid #ccc;

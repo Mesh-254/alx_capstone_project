@@ -20,6 +20,13 @@ def home():
     # Render the main page with empty recipe list and search query
     return render_template('/main/index.html', recipes=[], search_query='')
 
+# route to allow users serach for recipes
+@recipes.route('/search', methods=['GET', 'POST'])
+def search():
+    """Function to allow user search for recipes"""
+    if request.method == "POST":
+        pass
+
 
 # Define the main route for the app
 @recipes.route('/', methods=['GET', 'POST'])
@@ -102,7 +109,7 @@ def recipe_dish_types():
     params = {
         'apiKey': API_KEY,
         'query': 'dish',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,

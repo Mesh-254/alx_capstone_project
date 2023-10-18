@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+<h1>Search Recipe</h1>
+<form method="POST" action="/">
+    <input type="text" name="search_query" placeholder="Search for recipes">
+    <input type="submit" value="Search">
+</form>
+<!-- Recipe items available -->
+{% if recipes%}
+<ul class="recipe-items">
+    {% for recipe in recipes %}
+    <li class="uk-card">
+        {% if recipe.image %}
+        <img src="{{ recipe.image }}" alt="{{ recipe.title }}" class=".card-image ">
+        <div class="heart-icon">
+            <a href="#"><svg width="30" height="30" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                    data-svg="heart">
+                    <path fill="white" stroke="#000" stroke-width="0"
+                        d="M10,4 C10,4 8.1,2 5.74,2 C3.38,2 1,3.55 1,6.73 C1,8.84 2.67,10.44 2.67,10.44 L10,18 L17.33,10.44 C17.33,10.44 19,8.84 19,6.73 C19,3.55 16.62,2 14.26,2 C11.9,2 10,4 10,4 L10,4 Z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+        {% endif %}
+        <h3 class="uk-card-title">{{ recipe.title }}</h3>
+        <a href="{{ url_for('recipes.view_recipe', recipe_id=recipe.id, search_query=search_query) }}"
+            class="view-item">View</a>
+    </li>
+    {% endfor %}
+</ul>
+<!-- If no recipes are found -->
+{% else %}
+<p style=" font-size: 20px; font-weight: 500;">No recipes found.</p>
+{% endif %}
+
+
+<!-- End of recipe items -->
+
+{% endblock content %}
