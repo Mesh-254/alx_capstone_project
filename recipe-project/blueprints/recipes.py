@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""module to fetch recipe information"""
 from flask import *
 
 from flask.cli import load_dotenv
@@ -21,6 +22,8 @@ def home():
     return render_template('/main/index.html', recipes=[], search_query='')
 
 # route to allow users serach for recipes
+
+
 @recipes.route('/search', methods=['GET', 'POST'])
 def search():
     """Function to allow user search for recipes"""
@@ -55,7 +58,7 @@ def search_recipes(query):
     params = {
         'apiKey': API_KEY,
         'query': query,
-        'number': 5,
+        'number': 15,
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -447,6 +450,8 @@ def recipe_lunch():
     return render_template('main/recipes.html', recipes=recipes)
 
 # function to show recipes for Diabetic Recipes
+
+
 @recipes.route('/recipe-diabetic')
 def recipe_diabetic():
     """function to show Diabetic recipes"""
@@ -470,6 +475,8 @@ def recipe_diabetic():
     return render_template('main/recipes.html', recipes=recipes)
 
 # function to show recipes for Gluten Free Recipes
+
+
 @recipes.route('/recipe-Gluten-free')
 def recipe_gluten_free():
     """function to show Gluten Free recipes"""
@@ -539,7 +546,6 @@ def recipe_low_calorie():
         data = response.json()
         recipes += data['results']
     return render_template('main/recipes.html', recipes=recipes)
-
 
 
 # function to show recipes for chinese Recipes
@@ -662,7 +668,6 @@ def recipe_baby_shower():
     return render_template('main/recipes.html', recipes=recipes)
 
 
-
 # function to show recipes for Birthday Recipes
 @recipes.route('/recipe-birthday')
 def recipe_birthday():
@@ -709,7 +714,6 @@ def recipe_christmas():
         data = response.json()
         recipes += data['results']
     return render_template('main/recipes.html', recipes=recipes)
-
 
 
 # function to show recipes for Halloween Recipes
