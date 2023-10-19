@@ -11,9 +11,10 @@ import os
 
 # import models tables
 from models.database import db
-# from models.user import User
-# from models.recipes import Recipes
-# from models.comments import Comments 
+from models.user import User
+from models.recipe import Recipe
+from models.comment import Comment
+from models.rating import Rating
 
 # import of blueprints 
 from blueprints.recipes import recipes
