@@ -18,7 +18,7 @@ from models.rating import Rating
 
 # import of blueprints 
 from blueprints.recipes import recipes
-
+from blueprints.auth import auth
 
 
 # application
@@ -50,7 +50,7 @@ migrate = Migrate(app, db)
 
 # register blueprints
 app.register_blueprint(recipes,url_prefix='/')
-
+app.register_blueprint(auth, url_prefix='/')
 
 
 
@@ -59,29 +59,10 @@ app.register_blueprint(recipes,url_prefix='/')
 # login_manager.login_view = 'auth.login'
 
 
-
 @app.route('/base')
 def base():
     """display base page"""
     return render_template('/main/base.html')
-
-
-@app.route('/login')
-def login():
-    """display login page"""
-    return render_template('/user/login.html')
-
-
-@app.route('/signup')
-def signup():
-    """display login page"""
-    return render_template('/user/signup.html')
-
-
-@app.route('/detail')
-def recipe_detail():
-    """display login page"""
-    return render_template('/main/recipe-detail.html')
 
 
 if __name__ == '__main__':
