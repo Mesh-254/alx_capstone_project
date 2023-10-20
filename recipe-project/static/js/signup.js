@@ -10,7 +10,7 @@ function validateName() {
         nameError.textContent = "Please enter your Name";
         return false;
     }
-    if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+    if (!name.match(/^[A-Za-z]+\s[A-Za-z]+(\s[A-Za-z]+)?$/)) {
         nameError.textContent = "write full name"
         nameError.style.color = "red"
         return false;
@@ -86,10 +86,12 @@ function confirmPassword() {
     const confirmPassword = document.getElementById("confirm-password").value;
     const confirmError = document.getElementById("confirm-password-error");
 
-    if (password !== confirmPassword) {
-        confirmError.innerHTML = "Passwords do not match"
+    if (password === confirmPassword) {
+        confirmError.textContent = "passwords matched"
+        confirmError.style.color = "green"
+    } else {
+        confirmError.textContent = "Passwords do not match"
         confirmError.style.color = "red"
     }
-    confirmError.textContent = "passwords matched"
-    confirmError.style.color = "green"
+
 }
