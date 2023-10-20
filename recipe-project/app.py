@@ -17,6 +17,7 @@ from models.rating import Rating
 # Import blueprints for routing
 from blueprints.recipes import recipes
 from blueprints.auth import auth
+from blueprints.user import user
 
 # Create a Flask application
 app = Flask(__name__, template_folder='./templates')
@@ -39,13 +40,17 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_SERVER}/{DB_NAME}"
 
+
 # Initialize the database and set up migration support
 db.init_app(app)
 migrate = Migrate(app, db)
 
+
 # Register blueprints to organize routes
 app.register_blueprint(recipes, url_prefix='/')
 app.register_blueprint(auth, url_prefix='/')
+app.register_blueprint(user, url_prefix='/')
+
 
 # Create a LoginManager instance and configure it
 login = LoginManager()
@@ -59,6 +64,8 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # Define a route to display a base page
+
+
 @app.route('/base')
 def base():
     """display base page"""
