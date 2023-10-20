@@ -22,27 +22,40 @@
                 </div>
             </div>
             <div class="uk-text-center">
-                <p class="uk-margin-remove">Use your email account:</p>
+                <h4 class="text-center text-info"> Use your email account:</h4>
             </div>
-            <form class="uk-text-center">
+            <form class="uk-text-center" method="post" action="">
                 <div class="uk-width">
                     <label class="uk-form-label" for="email" >Email</label>
-                    <input id="email" class="uk-input " type="email"
+                    <input id="email" class="uk-input " type="email" name="email"
                         placeholder="Enter your email" required onkeyup="validateEmail()">
                     <p id="email-error"></p>
                 </div>
                 <div class="uk-width">
                     <label class="uk-form-label" for="password">Password</label>
-                    <input id="password" class="uk-input" type="password"
+                    <input id="password" name="password"  class="uk-input" type="password"
                         placeholder="Enter your password" required onkeyup="validatePassword()">
                     <p id="password-error"></p>
                 </div>
-                <div class="uk-width">
-                    <a class="forgot-password" href="#">Forgot your password?</a>
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox small">
+                        <input type="checkbox" class="custom-control-input" id="remember" name="remember">
+                        <label class="custom-control-label" for="remember">Remember
+                            Me</label>
+                    </div>
                 </div>
+                <!-- <div class="uk-width" style="margin-top: 10px;">
+                    <a class="forgot-password" href="#">Forgot your password?</a>
+                </div> -->
                 <div class="uk-width">
                     <button class="uk-button">Sign In</button>
                     <p id="submit-error"></p>
+                </div>
+                <div id="register-link" class="text-center" >
+                    <a href="/signup" class="text-info" style="text-decoration: none;">Or Create an Account here</a>
+                    <br>
+                    <hr>
+                    <a href="/reset_password" class="text-info" style="text-decoration: none;">Forget Password? Reset here</a>
                 </div>
             </form>
         </div>
