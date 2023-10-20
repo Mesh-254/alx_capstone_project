@@ -8,6 +8,8 @@ from flask_login import current_user, login_user, logout_user
 
 from models.user import User
 from models.database import db
+
+
 auth = Blueprint('auth', __name__)
 
 
