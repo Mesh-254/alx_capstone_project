@@ -1,5 +1,5 @@
 # Import necessary modules from Flask and other libraries
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
 from flask_migrate import Migrate
 from flask.cli import load_dotenv
 import os
@@ -70,6 +70,8 @@ def load_user(user_id):
 def base():
     """display base page"""
     return render_template('/main/base.html')
+
+
 
 
 # Start the Flask application if the script is executed directly
