@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login Page</title>
+    <title>Profile-Page</title>
     <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
     <link rel="icon" types="image/ico" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap" rel="stylesheet">
@@ -15,10 +15,28 @@
 
 <body>
     <div class="profile-page">
-        
+        <h1 style="text-align: center;">User Profile</h1>
+
+        <table>
+            <tr valign="top">
+                <td><img src="{{ user.avatar(128) }}"></td>
+                <td>
+                    <h2>Hi! {{user.name }}</h2>
+                    <p>Email: {{user.email}}</p>
+                    {% if user.last_seen %}
+                    <p>Last seen on: {{ user.last_seen }}</p>
+                    {% endif %}
+
+                    <a href="#">Change Password</a>
+                </td>
+            </tr>
+        </table>
+
+        <hr>
+
     </div>
     <!-- JS Scripts -->
-   
+
     <!-- End of js scripts -->
 </body>
 
