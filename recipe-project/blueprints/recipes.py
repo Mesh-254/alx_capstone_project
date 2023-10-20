@@ -28,7 +28,22 @@ def home():
 def search():
     """Function to allow user search for recipes"""
     if request.method == "POST":
-        pass
+        # If a form is submitted
+        query = request.form.get('search_query', '')
+
+        # Perform a search for recipes with the given query
+        recipes = search_recipes(query)
+
+        # Render the main page with the search results and the search query
+        return render_template('main/search_recipe.html', recipes=recipes, search_query=query)
+    else:
+        # If no form is submitted (user just loaded the page), show an empty result set
+        search_query = request.args.get('search_query', '')
+        decoded_search_query = unquote(search_query)
+        # Perform a search for recipes with the decoded search query
+        recipes = search_recipes(decoded_search_query)
+        # Render the main page
+        return render_template('main/search_recipe.html', recipes=recipes, search_query=decoded_search_query)
 
 
 # Define the main route for the app
@@ -58,7 +73,7 @@ def search_recipes(query):
     params = {
         'apiKey': API_KEY,
         'query': query,
-        'number': 5,
+        'number': 10,
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -75,9 +90,8 @@ def search_recipes(query):
     # If the API call is not successful
     return []
 
+
 # Route to view a specific recipe with a given recipe ID
-
-
 @recipes.route('/recipe/<int:recipe_id>')
 def view_recipe(recipe_id):
     """function to fetch particular recipe details"""

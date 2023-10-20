@@ -28,17 +28,16 @@ def login_post():
 
     # Check if the user already exists
     user = User.query.filter_by(email = email).first()
-    print(f'{user.email}, {user.password}, {user.user_id}')
     if not user:
-        print('You are not registered. Please sign up now.')
+        flash('You are not registered. Please signup now.', 'danger')
         return redirect(url_for('auth.signup'))  # Redirect to the signup page if the user doesn't exist
     elif not scrypt.hash(user.password, password) != user.password:
-        print('Please check your login details and try again.')
-        # return redirect(url_for('auth.login'))  # Redirect to the login page if the password is incorrect
+        flash('Please check your login details and try again.')
+        return redirect(url_for('auth.login'))  # Redirect to the login page if the password is incorrect
     else:
         login_user(user, remember=remember)  # Log in the user
-        print('Authenticated')
-        # return redirect(url_for('main.index'))  # Redirect to the main page after successful login
+        flash('You have successfully logged in', 'success')
+        return redirect(url_for('recipes.index'))  # Redirect to the main page after successful login
 
 
 
