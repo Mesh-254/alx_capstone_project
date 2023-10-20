@@ -46,7 +46,7 @@
             </div>
             <nav class="nav-menu">
                 <a href="/">Home</a>
-                <a href="/">Search</a>
+                <a href="/search">Search</a>
                 <a href="/">Recipe</a>
                 <a href="#">Contact</a>
             </nav>
@@ -62,7 +62,9 @@
 
     <!-- Main section  -->
     <main>
-
+        {% block main %}
+        
+        {% endblock main %}
     </main>
     <!-- End of Main section  -->
     {% block content %}
