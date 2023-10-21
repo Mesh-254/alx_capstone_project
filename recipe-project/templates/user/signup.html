@@ -21,6 +21,15 @@
                     <h1 class="heading-text">Create an Account at<span class="logo">FlavorRover</span></h1>
                 </div>
             </div>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
             <div class="uk-text-center">
                 <p class="uk-margin-remove">Use your email account:</p>
             </div>
