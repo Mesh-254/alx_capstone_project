@@ -74,7 +74,7 @@ def search_recipes(query):
     params = {
         'apiKey': API_KEY,
         'query': query,
-        'number': 10,
+        'number': 20,
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -166,23 +166,35 @@ def recipe_meal_types():
     BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch'
     # Combine MEAL types with a comma
     MEAL_TYPES = 'Breakfast, Brunch, Desserts, Dinners, Lunch'
-    for meal in MEAL_TYPES:
+    
+    # Make a request to the Spoonacular API for each list name
+    params = {
+        'apiKey': API_KEY,
+        'query': 'lunch, dinner, breakfast',
+        'number': 20,  # You can adjust the number of recipes to retrieve
+        'instructionsRequired': True,
+        'addRecipeInformation': True,
+        'fillIngredients': True,
+    }
+    response = requests.get(BASE_URL, params=params)
+    if (response.status_code == 200):
+        data = response.json()
+        recipes += data['results']
 
-        # Make a request to the Spoonacular API for each list name
-        params = {
-            'apiKey': API_KEY,
-            'query': meal,
-            'number': 5,  # You can adjust the number of recipes to retrieve
-            'instructionsRequired': True,
-            'addRecipeInformation': True,
-            'fillIngredients': True,
-        }
-        response = requests.get(BASE_URL, params=params)
-        if (response.status_code == 200):
-            data = response.json()
-            recipes += data['results']
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
 
-    return render_template('main/recipes.html', recipes=recipes)
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for particular type
@@ -196,8 +208,8 @@ def recipe_diet_health():
     # Make a request to the Spoonacular API for each list name
     params = {
         'apiKey': API_KEY,
-        'query': 'Diet',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'query': 'health',
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -206,8 +218,22 @@ def recipe_diet_health():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-        return render_template('main/recipes.html', recipes=recipes)
-    return "Recipe not found", 404
+    
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
+
 
 # function to show recipes for particular type
 
@@ -223,7 +249,7 @@ def recipe_cuisine():
     params = {
         'apiKey': API_KEY,
         'query': 'cuisine',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -233,7 +259,20 @@ def recipe_cuisine():
         data = response.json()
         recipes += data['results']
 
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for particular type
@@ -247,8 +286,8 @@ def recipe_seasonal():
     # Make a request to the Spoonacular API for each list name
     params = {
         'apiKey': API_KEY,
-        'query': 'cuisine',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'query': 'seasonal',
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -258,7 +297,20 @@ def recipe_seasonal():
         data = response.json()
         recipes += data['results']
 
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 # Different routes to display different queries from categories
 
@@ -275,7 +327,7 @@ def recipe_Appetizers():
     params = {
         'apiKey': API_KEY,
         'query': 'Appetizers',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -285,7 +337,20 @@ def recipe_Appetizers():
         data = response.json()
         recipes += data['results']
 
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for Bread Recipes
@@ -300,7 +365,7 @@ def recipe_bread():
     params = {
         'apiKey': API_KEY,
         'query': 'bread',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -310,7 +375,20 @@ def recipe_bread():
         data = response.json()
         recipes += data['results']
 
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for cake Recipes
@@ -325,7 +403,7 @@ def recipe_cake():
     params = {
         'apiKey': API_KEY,
         'query': 'bread',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -335,8 +413,20 @@ def recipe_cake():
         data = response.json()
         recipes += data['results']
 
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
 
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 # function to show recipes for candy Recipes
 @recipes.route('/recipe-candy')
@@ -350,7 +440,7 @@ def recipe_candy():
     params = {
         'apiKey': API_KEY,
         'query': 'candy',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -359,7 +449,20 @@ def recipe_candy():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for casserole Recipes
@@ -374,7 +477,7 @@ def recipe_casserole():
     params = {
         'apiKey': API_KEY,
         'query': 'casserole',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -383,7 +486,20 @@ def recipe_casserole():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for Breakfast Recipes
@@ -398,7 +514,7 @@ def recipe_breakfast():
     params = {
         'apiKey': API_KEY,
         'query': 'breakfast',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -407,7 +523,20 @@ def recipe_breakfast():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for desserts Recipes
@@ -422,7 +551,7 @@ def recipe_desserts():
     params = {
         'apiKey': API_KEY,
         'query': 'desserts',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -431,7 +560,20 @@ def recipe_desserts():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for Dinners Recipes
@@ -446,7 +588,7 @@ def recipe_dinners():
     params = {
         'apiKey': API_KEY,
         'query': 'dinners',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -455,7 +597,20 @@ def recipe_dinners():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for lunch Recipes
@@ -470,7 +625,7 @@ def recipe_lunch():
     params = {
         'apiKey': API_KEY,
         'query': 'lunch',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -479,7 +634,20 @@ def recipe_lunch():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 # function to show recipes for Diabetic Recipes
 
@@ -495,7 +663,7 @@ def recipe_diabetic():
     params = {
         'apiKey': API_KEY,
         'query': 'Diabetic',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -504,7 +672,20 @@ def recipe_diabetic():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 # function to show recipes for Gluten Free Recipes
 
@@ -520,7 +701,7 @@ def recipe_gluten_free():
     params = {
         'apiKey': API_KEY,
         'query': 'glutenfree',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -529,7 +710,20 @@ def recipe_gluten_free():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for High Fiber Recipes
@@ -544,7 +738,7 @@ def recipe_high_fiber():
     params = {
         'apiKey': API_KEY,
         'query': 'Highfiber',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -553,7 +747,20 @@ def recipe_high_fiber():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for Low Calorie Recipes
@@ -568,7 +775,7 @@ def recipe_low_calorie():
     params = {
         'apiKey': API_KEY,
         'query': 'lowcalorie',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 25,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -577,7 +784,20 @@ def recipe_low_calorie():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for chinese Recipes
@@ -592,7 +812,7 @@ def recipe_chinese():
     params = {
         'apiKey': API_KEY,
         'query': 'Chinese',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 25,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -601,7 +821,20 @@ def recipe_chinese():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for Indian Recipes
@@ -616,7 +849,7 @@ def recipe_indian():
     params = {
         'apiKey': API_KEY,
         'query': 'indian',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 25,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -625,7 +858,20 @@ def recipe_indian():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for italian Recipes
@@ -640,7 +886,7 @@ def recipe_italian():
     params = {
         'apiKey': API_KEY,
         'query': 'italian',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 25,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -649,7 +895,20 @@ def recipe_italian():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for Mexican Recipes
@@ -664,7 +923,7 @@ def recipe_mexican():
     params = {
         'apiKey': API_KEY,
         'query': 'mexican',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 25,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -673,7 +932,20 @@ def recipe_mexican():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for Baby Shower Recipes
@@ -688,7 +960,7 @@ def recipe_baby_shower():
     params = {
         'apiKey': API_KEY,
         'query': 'babyshower',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 25,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -697,7 +969,20 @@ def recipe_baby_shower():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for Birthday Recipes
@@ -712,7 +997,7 @@ def recipe_birthday():
     params = {
         'apiKey': API_KEY,
         'query': 'birthday',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 25,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -721,7 +1006,20 @@ def recipe_birthday():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for Christmas Recipes
@@ -736,7 +1034,7 @@ def recipe_christmas():
     params = {
         'apiKey': API_KEY,
         'query': 'Christmas',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'number': 25,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -745,7 +1043,20 @@ def recipe_christmas():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for Halloween Recipes
@@ -759,8 +1070,8 @@ def recipe_halloween():
     # Make a request to the Spoonacular API for each list name
     params = {
         'apiKey': API_KEY,
-        'query': 'Halloween',
-        'number': 5,  # You can adjust the number of recipes to retrieve
+        'query': 'halloween',
+        'number': 25,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -769,4 +1080,17 @@ def recipe_halloween():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
