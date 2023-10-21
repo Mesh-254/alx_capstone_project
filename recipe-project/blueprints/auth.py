@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """Module to fetch user information """
-import scrypt
 from flask import *
 import re  # regular expression import
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import current_user, login_user, logout_user
+from flask_login import login_user, logout_user
 
 from models.user import User
 from models.database import db
@@ -20,7 +19,7 @@ def login():
     return render_template('user/login.html')
 
 
-@auth.route('/login', methods=['GET','POST'])
+@auth.route('/login', methods=['GET', 'POST'])
 def login_post():
     """Function to perform login"""
     # Fetch data from the form
@@ -29,18 +28,21 @@ def login_post():
     remember = True if request.form.get('remember') else False
 
     # Check if the user already exists
-    user = User.query.filter_by(email = email).first()
+    user = User.query.filter_by(email=email).first()
     if not user:
         flash('You are not registered. Please signup now.', 'danger')
-        return redirect(url_for('auth.signup'))  # Redirect to the signup page if the user doesn't exist
-    elif not scrypt.hash(user.password, password) != user.password:
+        # Redirect to the signup page if the user doesn't exist
+        return redirect(url_for('auth.signup'))
+
+    if not check_password_hash(user.password, password):
         flash('Please check your login details and try again.')
-        return redirect(url_for('auth.login'))  # Redirect to the login page if the password is incorrect
+        # Redirect to the login page if the password is incorrect
+        return redirect(url_for('auth.login'))
     else:
         login_user(user, remember=remember)  # Log in the user
         flash('You have successfully logged in', 'success')
-        return redirect(url_for('recipes.index'))  # Redirect to the main page after successful login
-
+        # Redirect to the main page after successful login
+        return redirect(url_for('recipes.index'))
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
@@ -93,7 +95,8 @@ def signup():
             return redirect(url_for('auth.signup'))
 
         # Create a new user and add them to the database
-        new_user = User(name=name, email=email, password=generate_password_hash(password, method='scrypt'))
+        new_user = User(name=name, email=email, password=generate_password_hash(
+            password, method='bcrypt').decode('utf-8'))
 
         db.session.add(new_user)
         db.session.commit()
@@ -102,7 +105,6 @@ def signup():
 
     # Render the signup form if it's a GET request
     return render_template('user/signup.html')
-
 
 
 @auth.route('/logout')

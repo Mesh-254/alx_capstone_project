@@ -19,6 +19,10 @@ from blueprints.recipes import recipes
 from blueprints.auth import auth
 from blueprints.user import user
 
+from flask_bcrypt import Bcrypt
+
+
+
 # Create a Flask application
 app = Flask(__name__, template_folder='./templates')
 
@@ -57,6 +61,7 @@ login = LoginManager()
 login.init_app(app)
 login.login_view = 'auth.login'
 
+bcrypt = Bcrypt(app)
 
 # Function decorator to load a user by their ID when needed for authentication
 @login.user_loader

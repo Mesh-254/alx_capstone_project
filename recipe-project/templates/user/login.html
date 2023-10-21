@@ -16,6 +16,15 @@
 <body>
     <div class="login-page">
         <div class="login-section">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
             <div class="login">
                 <div class="heading">
                     <h1 class="heading-text">Sign In to <span class="logo">FlavorRover</span></h1>
@@ -26,14 +35,14 @@
             </div>
             <form class="uk-text-center" method="post" action="">
                 <div class="uk-width">
-                    <label class="uk-form-label" for="email" >Email</label>
-                    <input id="email" class="uk-input " type="email" name="email"
-                        placeholder="Enter your email" required onkeyup="validateEmail()">
+                    <label class="uk-form-label" for="email">Email</label>
+                    <input id="email" class="uk-input " type="email" name="email" placeholder="Enter your email"
+                        required onkeyup="validateEmail()">
                     <p id="email-error"></p>
                 </div>
                 <div class="uk-width">
                     <label class="uk-form-label" for="password">Password</label>
-                    <input id="password" name="password"  class="uk-input" type="password"
+                    <input id="password" name="password" class="uk-input" type="password"
                         placeholder="Enter your password" required onkeyup="validatePassword()">
                     <p id="password-error"></p>
                 </div>
@@ -51,11 +60,11 @@
                     <button class="uk-button">Sign In</button>
                     <p id="submit-error"></p>
                 </div>
-                <div id="register-link" class="text-center" >
+                <div id="register-link" class="text-center">
                     <a href="/signup" class="text-info" style="text-decoration: none;">Or Create an Account here</a>
                     <br>
                     <hr>
-                    <a href="/reset_password" class="text-info" style="text-decoration: none;">Forget Password? Reset here</a>
+                    <a href="#" class="text-info" style="text-decoration: none;">Forget Password? Reset here</a>
                 </div>
             </form>
         </div>

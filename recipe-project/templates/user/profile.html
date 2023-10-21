@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Profile-Page</title>
+    <title>{% block title %}profile{%endblock%}</title>
     <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
     <link rel="icon" types="image/ico" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
                     <p>Last seen on: {{ user.last_seen }}</p>
                     {% endif %}
 
-                    <a href="#">Change Password</a>
+                    <a href="/change-password">Change Password</a>
                 </td>
             </tr>
         </table>
@@ -35,6 +35,9 @@
         <hr>
 
     </div>
+    {% block content %}
+
+    {% endblock content %}
     <!-- JS Scripts -->
 
     <!-- End of js scripts -->
