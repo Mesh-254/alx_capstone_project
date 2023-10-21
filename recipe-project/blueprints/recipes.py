@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """module to fetch recipe information"""
 from flask import *
-
+from flask_paginate import Pagination, get_page_parameter
 from flask.cli import load_dotenv
 import os
 import requests
@@ -62,6 +62,7 @@ def index():
     decoded_search_query = unquote(search_query)
     # Perform a search for recipes with the decoded search query
     recipes = search_recipes(decoded_search_query)
+    
     # Render the main page
     return render_template('main/index.html', recipes=recipes, search_query=decoded_search_query)
 
@@ -116,6 +117,9 @@ def view_recipe(recipe_id):
 @recipes.route('/recipe-dish-types')
 def recipe_dish_types():
     """function to show different dish-types recipes"""
+
+    per_page = 9  # Number of recipes per page
+    page = request.args.get('page', type=int, default=1)
     recipes = []
     BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch'
 
@@ -128,6 +132,7 @@ def recipe_dish_types():
         'query': 'dish',
         'number': 20,  # You can adjust the number of recipes to retrieve
         'instructionsRequired': True,
+        'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
     }
@@ -136,7 +141,20 @@ def recipe_dish_types():
         data = response.json()
         recipes += data['results']
 
-    return render_template('main/recipes.html', recipes=recipes)
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
+
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+    
+    return render_template('main/recipes.html',
+                           recipes=pagination_recipes,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # function to show recipes for particular type
