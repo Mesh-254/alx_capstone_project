@@ -1,0 +1,88 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('../images/profile-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+main{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+header {
+    text-align: center;
+    background-color: #720641;
+    padding: 20px;
+    font-size: 32px;
+    color: white;
+    text-transform: uppercase;
+}
+
+aside {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 20%;
+    max-width: 300px;
+    float: left;
+    margin: 20px auto;
+}
+
+aside img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    max-width: 128px;
+    border: 2px solid #ff6565;
+    transition: transform 0.3s;
+}
+
+aside img:hover {
+    transform: scale(1.05);
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 10px 0;
+    text-align: left;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #ff6565;
+    display: block;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #0056b3;
+}
+
+.content {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    width: 75%;
+    max-width: 800px;
+}
+
+h2 {
+    font-size: 24px;
+    color: #ff6565;
+}
+
+p {
+    font-size: 18px;
+    color: #555;
+}
