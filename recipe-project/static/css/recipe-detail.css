@@ -562,6 +562,56 @@ main::before {
   margin-right: 5px; /* Adjust the spacing */
 }
 
+/* RECIPE ITEMS SECTION */
+.recipe-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.uk-card {
+  max-width: calc(20% - 20px);
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 10px; /* Apply border radius to the card */
+  overflow: hidden; /* Hide content overflow */
+}
+
+.uk-card img {
+  max-width: 100%; /* Make the image responsive */
+  border-radius: 10px 10px 0 0; /* Apply border radius to the image */
+}
+
+.heart-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.uk-card-title {
+  font-size: 13px;
+  margin: 10px; /* Add some margin around the title */
+  text-wrap: wrap;
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add an ellipsis (...) for overflow text */
+}
+
+.view-item {
+  text-decoration: none;
+  background-color: rgba(235, 74, 54, 1);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+.view-item:hover {
+  opacity: 1.3;
+}
+
+
 /* FOOTER SECTION */
 .footer {
   display: flex;
@@ -598,6 +648,10 @@ main::before {
       0.4
     ); /* Make the overlay darker for smaller screens */
   }
+  .recipe-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 480px) {
@@ -608,5 +662,9 @@ main::before {
       0,
       0.4
     ); /* Further darken the overlay for even smaller screens */
+  }
+  .recipe-items {
+    display: flex;
+    flex-wrap: wrap;
   }
 }

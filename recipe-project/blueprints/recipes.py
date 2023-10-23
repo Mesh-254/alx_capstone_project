@@ -62,7 +62,7 @@ def index():
     decoded_search_query = unquote(search_query)
     # Perform a search for recipes with the decoded search query
     recipes = search_recipes(decoded_search_query)
-    
+
     # Render the main page
     return render_template('main/index.html', recipes=recipes, search_query=decoded_search_query)
 
@@ -91,6 +91,26 @@ def search_recipes(query):
     # If the API call is not successful
     return []
 
+# Function to fetch similar recipes for a given recipe ID
+
+
+def get_similar_recipes(recipe_id, number=10):
+    # Build the URL to get similar recipes for the specified recipe ID
+    url = f'https://api.spoonacular.com/recipes/{recipe_id}/similar'
+    params = {
+        'apiKey': API_KEY,  # Replace with your Spoonacular API key
+        'number': number,   # Number of similar recipes to retrieve
+    }
+
+    # Send a GET request to the Spoonacular API to get similar recipes
+    response = requests.get(url, params=params)
+
+    # If the API call is successful, return the list of similar recipes
+    if response.status_code == 200:
+        similar_recipes = response.json()
+        return similar_recipes
+    return []  # Return an empty list if the API call fails
+
 
 # Route to view a specific recipe with a given recipe ID
 @recipes.route('/recipe/<int:recipe_id>')
@@ -106,10 +126,14 @@ def view_recipe(recipe_id):
 
     # Send a GET request to the Spoonacular API to get the recipe information
     response = requests.get(url, params=params)
+
+    # Fetch similar recipes for the specified recipe
+    similar_recipes = get_similar_recipes(recipe_id, number=10)
+
     # If the API call is successful
     if response.status_code == 200:
         recipe = response.json()
-        return render_template('main/recipe-detail.html', recipe=recipe, search_query=search_query)
+        return render_template('main/recipe-detail.html', recipe=recipe, search_query=search_query, similar_recipes=similar_recipes)
     return "Recipe not found", 404
 
 
@@ -149,7 +173,7 @@ def recipe_dish_types():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -166,7 +190,7 @@ def recipe_meal_types():
     BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch'
     # Combine MEAL types with a comma
     MEAL_TYPES = 'Breakfast, Brunch, Desserts, Dinners, Lunch'
-    
+
     # Make a request to the Spoonacular API for each list name
     params = {
         'apiKey': API_KEY,
@@ -189,7 +213,7 @@ def recipe_meal_types():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -218,7 +242,7 @@ def recipe_diet_health():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
-    
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -227,7 +251,7 @@ def recipe_diet_health():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -267,7 +291,7 @@ def recipe_cuisine():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -305,7 +329,7 @@ def recipe_seasonal():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -345,7 +369,7 @@ def recipe_Appetizers():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -383,7 +407,7 @@ def recipe_bread():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -421,7 +445,7 @@ def recipe_cake():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -429,6 +453,8 @@ def recipe_cake():
                            pagination=pagination)
 
 # function to show recipes for candy Recipes
+
+
 @recipes.route('/recipe-candy')
 def recipe_candy():
     """function to show Candy recipes"""
@@ -457,7 +483,7 @@ def recipe_candy():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -494,7 +520,7 @@ def recipe_casserole():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -531,7 +557,7 @@ def recipe_breakfast():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -568,7 +594,7 @@ def recipe_desserts():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -605,7 +631,7 @@ def recipe_dinners():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -642,7 +668,7 @@ def recipe_lunch():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -680,7 +706,7 @@ def recipe_diabetic():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -718,7 +744,7 @@ def recipe_gluten_free():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -755,7 +781,7 @@ def recipe_high_fiber():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -792,7 +818,7 @@ def recipe_low_calorie():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -829,7 +855,7 @@ def recipe_chinese():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -866,7 +892,7 @@ def recipe_indian():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -903,7 +929,7 @@ def recipe_italian():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -940,7 +966,7 @@ def recipe_mexican():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -977,7 +1003,7 @@ def recipe_baby_shower():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -1014,7 +1040,7 @@ def recipe_birthday():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -1051,7 +1077,7 @@ def recipe_christmas():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
@@ -1088,7 +1114,7 @@ def recipe_halloween():
 
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
-    
+
     return render_template('main/recipes.html',
                            recipes=pagination_recipes,
                            page=page,
