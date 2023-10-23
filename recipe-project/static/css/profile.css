@@ -7,14 +7,14 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
-main{
+.main-section{
     display: flex;
     flex-wrap: wrap;
 }
 
 header {
     text-align: center;
-    background-color: #720641;
+    background-color: #380420;
     padding: 20px;
     font-size: 32px;
     color: white;
@@ -58,13 +58,13 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     font-size: 18px;
-    color: #ff6565;
+    color: #0f0f0f;
     display: block;
     transition: color 0.3s;
 }
 
 nav ul li a:hover {
-    color: #0056b3;
+    color: #ff6565;
 }
 
 .content {
@@ -79,9 +79,12 @@ nav ul li a:hover {
 
 h2 {
     font-size: 24px;
-    color: #ff6565;
+    color: black;
 }
 
+.user-name{
+    color: #ff6565;
+}
 p {
     font-size: 18px;
     color: #555;

@@ -18,11 +18,10 @@
 </head>
 
 <body>
-    <header>
-        <h1>User Profile</h1>
-    </header>
-    <main>
-
+    <div class="container">
+        <header class="text-center mt-4">
+            <h1 class="display-3">User Profile</h1>
+        </header>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul>
@@ -32,32 +31,41 @@
         </ul>
         {% endif %}
         {% endwith %}
-        <aside>
-            <img src="{{ user.avatar(128) }}" alt="User Profile Image">
-            <div class="user-details">
-                <h2>Hi! {{user.name }}</h2>
-                <p>Email: {{user.email}}</p>
-                {% if user.last_seen %}
-                <p>Last seen on: {{ user.last_seen }}</p>
-                {% endif %}
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="/">Dashboard</a></li>
-                    <li><a href="/change-password">Change Password</a></li>
-                    <li><a href="/logout">Logout</a></li>
-                </ul>
-            </nav>
-        </aside>
-        <section class="content">
-            {% block content %}
+        <div class="row">
+            <aside class="col-md-3">
+                <div class="text-center">
+                    <img src="{{ user.avatar(128) }}" alt="User Profile Image" class="img-fluid rounded-circle mt-3">
+                </div>
+                <nav class="mt-3">
+                    <ul class="list-unstyled">
+                        <li>
+                            <h2>Hi!<span class="user-name"> {{user.name }}</span></h2>
+                        </li>
+                        <li>
+                            <p>Email: {{user.email}}</p>
+                        </li>
+                        <li>{% if user.last_seen %}
+                            <p>Last seen on: {{ user.last_seen }}</p>
+                            {% endif %}
+                        </li>
+                        <li><a href="/" class="text-decoration-none">Home</a></li>
+                        <li><a href="/profile" class="text-decoration-none">Profile</a></li>
+                        <li><a href="/change-password" class="text-decoration-none">Change Password</a></li>
+                        <li><a href="/logout" class="text-decoration-none">Logout</a></li>
+                    </ul>
+                </nav>
+            </aside>
+            <section class="col-md-9">
+                <div class="content bg-light p-4 rounded">
+                    {% block content %}
 
-            {% endblock content %}
-        </section>
-    </main>
-    <!-- JS Scripts -->
-
-    <!-- End of js scripts -->
+                    {% endblock content %}
+                </div>
+            </section>
+        </div>
+        <!-- JS Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+        <!-- End of js scripts -->
 </body>
 
 </html>
