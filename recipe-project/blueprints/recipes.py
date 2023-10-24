@@ -103,9 +103,20 @@ def index():
             # Add the recipe to the database
             db.session.add(recipe)
             db.session.commit()  # Commit the changes to the database
+    # pagination parameters
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 20  # You can adjust the number of recipes per page
+    offset = (page - 1) * per_page
+    total = len(recipes)
 
-    # Render the main page
-    return render_template('main/index.html', recipes=recipes, search_query=decoded_search_query)
+    pagination_recipes = recipes[offset:offset + per_page]
+    pagination = Pagination(page=page, total=total, per_page=per_page)
+
+    # Render the index page
+    return render_template('main/index.html', recipes=pagination_recipes,
+                            search_query=decoded_search_query, page=page,
+                            per_page=per_page,
+                            pagination=pagination)
 
 
 # Function to search for recipes based on the provided query
@@ -115,7 +126,7 @@ def search_recipes(query):
     params = {
         'apiKey': API_KEY,
         'query': query,
-        'number': 20,
+        'number': 30,
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
