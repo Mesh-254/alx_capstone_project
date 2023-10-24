@@ -12,7 +12,7 @@ from models.database import db
 review = Blueprint('review', __name__)
 
 
-@review.route('/comment/<int:recipe_id>', methods=['POST'])
+@review.route('/comment/<int:recipe_id>', methods=['GET', 'POST'])
 def add_comment(recipe_id):
     """Function to get reviews"""
     if request.method == 'POST':
@@ -40,5 +40,5 @@ def add_comment(recipe_id):
         # Add the comment to the database
         db.session.add(comment)
         db.session.commit()
-
         return jsonify({'message': 'Comment added successfully'}), 200
+    return 'There was an error in your form'

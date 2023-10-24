@@ -198,11 +198,10 @@
                         <div class="container">
                             <div class="feedback-list__add-feedback-wrapper">
                                 <div class="feedback-form">
-                                    <form action="#" method="post">
+                                    <form action="{{url_for('review.add_comment', recipe_id=recipe.id)}}" method="post">
                                         <div class="feedback-form__heading">
                                             <div class="media">
-                                                <img class="mr-3 rounded-circle"
-                                                    src="{{ current_user.avatar(128) }}"
+                                                <img class="mr-3 rounded-circle" src="{{ current_user.avatar(128) }}"
                                                     alt="USER" width="50" height="50">
                                                 <div class="media-body feedback-form__recipe-title">
                                                     {{current_user.name}}
@@ -260,12 +259,10 @@
                                             </textarea>
                                         </div>
                                         <div class="feedback-form__actions">
-                                            <button class="btn btn-secondary feedback-form__cancel"
-                                                data-click-tracked="false">
+                                            <button class="btn btn-secondary feedback-form__cancel" data-click-tracked="false">
                                                 Cancel
                                             </button>
-                                            <button class="btn btn-primary feedback-form__submit"
-                                                data-click-tracked="false" type="submit" disabled="disabled">
+                                            <button class="btn btn-primary feedback-form__submit" type="submit" name="submit">
                                                 Submit
                                             </button>
                                         </div>
@@ -277,8 +274,7 @@
                         <ul class="list-unstyled mt-4">
                             <li>
                                 <div class="media">
-                                    <img class="mr-3 rounded-circle"
-                                        src="{{ current_user.avatar(128) }}" alt="User"
+                                    <img class="mr-3 rounded-circle" src="{{ current_user.avatar(128) }}" alt="User"
                                         width="50" height="50">
                                     <div class="media-body">
                                         <h4 class="mt-0"><a href="#">{{current_user.name}}</a></h4>

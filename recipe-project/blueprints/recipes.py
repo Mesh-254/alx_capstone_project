@@ -39,8 +39,20 @@ def search():
         # Perform a search for recipes with the given query
         recipes = search_recipes(query)
 
+        # pagination parameters
+        page = request.args.get(get_page_parameter(), type=int, default=1)
+        per_page = 10  # You can adjust the number of recipes per page
+        offset = (page - 1) * per_page
+        total = len(recipes)
+
+        pagination_recipes = recipes[offset:offset + per_page]
+        pagination = Pagination(page=page, total=total, per_page=per_page)
+
         # Render the main page with the search results and the search query
-        return render_template('main/search_recipe.html', recipes=recipes, search_query=query)
+        return render_template('main/search_recipe.html', recipes=pagination_recipes,
+                               search_query=query, page=page,
+                               per_page=per_page,
+                               pagination=pagination)
     else:
         # If no form is submitted (user just loaded the page), show an empty result set
         search_query = request.args.get('search_query', '')
