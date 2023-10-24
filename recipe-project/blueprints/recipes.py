@@ -7,6 +7,11 @@ import os
 import requests
 from urllib.parse import unquote
 
+
+from models.recipe import Recipe
+from models.database import db
+
+
 recipes = Blueprint('recipes', __name__)
 
 
@@ -165,6 +170,29 @@ def recipe_dish_types():
         data = response.json()
         recipes += data['results']
 
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -205,6 +233,29 @@ def recipe_meal_types():
         data = response.json()
         recipes += data['results']
 
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -242,6 +293,29 @@ def recipe_diet_health():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
 
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
@@ -283,6 +357,29 @@ def recipe_cuisine():
         data = response.json()
         recipes += data['results']
 
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -320,6 +417,29 @@ def recipe_seasonal():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
 
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
@@ -361,6 +481,29 @@ def recipe_Appetizers():
         data = response.json()
         recipes += data['results']
 
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -398,6 +541,29 @@ def recipe_bread():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
 
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
@@ -437,6 +603,29 @@ def recipe_cake():
         data = response.json()
         recipes += data['results']
 
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -475,6 +664,30 @@ def recipe_candy():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -512,6 +725,30 @@ def recipe_casserole():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -549,6 +786,30 @@ def recipe_breakfast():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -586,6 +847,30 @@ def recipe_desserts():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -623,6 +908,30 @@ def recipe_dinners():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -660,6 +969,30 @@ def recipe_lunch():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -698,6 +1031,30 @@ def recipe_diabetic():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -736,6 +1093,30 @@ def recipe_gluten_free():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -773,6 +1154,30 @@ def recipe_high_fiber():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -810,6 +1215,30 @@ def recipe_low_calorie():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -847,6 +1276,30 @@ def recipe_chinese():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -884,6 +1337,30 @@ def recipe_indian():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -921,6 +1398,30 @@ def recipe_italian():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -958,6 +1459,30 @@ def recipe_mexican():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -995,6 +1520,30 @@ def recipe_baby_shower():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -1032,6 +1581,30 @@ def recipe_birthday():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -1069,6 +1642,30 @@ def recipe_christmas():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
@@ -1106,6 +1703,30 @@ def recipe_halloween():
     if (response.status_code == 200):
         data = response.json()
         recipes += data['results']
+
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # pagination parameters
     page = request.args.get(get_page_parameter(), type=int, default=1)
     per_page = 10  # You can adjust the number of recipes per page
