@@ -72,8 +72,21 @@ def index():
         query = request.form.get('search_query', '')
         # Perform a search for recipes with the given query
         recipes = search_recipes(query)
-        # Render the main page with the search results and the search query
-        return render_template('main/index.html', recipes=recipes, search_query=query)
+        # pagination parameters
+        page = request.args.get(get_page_parameter(), type=int, default=1)
+        per_page = 20  # You can adjust the number of recipes per page
+        offset = (page - 1) * per_page
+        total = len(recipes)
+
+        pagination_recipes = recipes[offset:offset + per_page]
+        pagination = Pagination(page=page, total=total, per_page=per_page)
+
+        # Render the index page
+        return render_template('main/index.html', recipes=pagination_recipes,
+                                search_query=query, page=page,
+                                per_page=per_page,
+                                pagination=pagination)
+
 
     # If it's a GET request or no form submitted
     search_query = request.args.get('search_query', '')

@@ -1,5 +1,20 @@
 {% extends 'main/base.html' %}
-{% block title %}Search-Recipes{% endblock %}
+{% block title %}Recipes{% endblock %}
+
+<!-- MAIN BLOCK SECTION  -->
+{% block main %}
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <h2>"Recipe Adventure Awaits"</h2>
+
+<p style="font-size: 18px;">
+    Embark on a culinary journey and discover a variety of mouthwatering recipes.
+    Get ready to create, savor, and share the flavors of happiness.
+</p>
+</div>
+{% endblock main %}
+<!-- END OF MAIN BLOCK -->
+
+<!-- BLOCK CONTENT SECTION  -->
 {% block content %}
 <!-- Recipe items available -->
 {% if recipes%}
