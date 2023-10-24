@@ -18,6 +18,8 @@ from models.rating import Rating
 from blueprints.recipes import recipes
 from blueprints.auth import auth
 from blueprints.user import user
+from blueprints.reviews import review
+
 
 from flask_bcrypt import Bcrypt
 
@@ -54,7 +56,7 @@ migrate = Migrate(app, db)
 app.register_blueprint(recipes, url_prefix='/')
 app.register_blueprint(auth, url_prefix='/')
 app.register_blueprint(user, url_prefix='/')
-
+app.register_blueprint(review, url_prefix='/')
 
 # Create a LoginManager instance and configure it
 login = LoginManager()

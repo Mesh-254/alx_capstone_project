@@ -180,7 +180,8 @@
                             {% for step in recipe.analyzedInstructions[0].steps %}
                             <li class="step-item">
                                 <span class="step-icon" onclick="fadeText()">
-                                    <svg width="16" height="16" viewBox="0 0 20 20" style="color: red;" xmlns="http://www.w3.org/2000/svg" data-svg="check">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" style="color: red;"
+                                        xmlns="http://www.w3.org/2000/svg" data-svg="check">
                                         <polyline fill="none" stroke="#000" stroke-width="1.1" points="4,10 8,15 17,4">
                                         </polyline>
                                     </svg>
@@ -189,146 +190,118 @@
                             </li>
                             {% endfor %}
                         </ol>
-                        
+
                         <a href="/?search_query={{ search_query }}">Back to search results</a>
 
                         <hr style="border: 1px solid black;">
                         <h3>Comments</h3>
-                        <ul class="uk-comment-list uk-margin-medium-top">
-                            <li>
-                                <article class="uk-comment uk-visible-toggle" tabindex="-1">
-                                    <header class="uk-comment-header uk-position-relative">
-                                        <div class="uk-grid-medium uk-flex-middle" data-uk-grid>
-                                            <div class="uk-width-auto">
-                                                <img class="uk-comment-avatar uk-border-circle"
-                                                    src="https://source.unsplash.com/EGVccebWodM/100x100" width="50"
-                                                    height="50" alt="Alice Thomson">
-                                            </div>
-                                            <div class="uk-width-expand">
-                                                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset"
-                                                        href="recipe.html#">Alice
-                                                        Thomson</a></h4>
-                                                <p class="uk-comment-meta uk-margin-remove"><a class="uk-link-reset"
-                                                        href="recipe.html#">12 days
-                                                        ago</a></p>
-                                                <div class="uk-rating">
-                                                    <span class="uk-rating-filled"
-                                                        data-uk-icon="icon: star; ratio: 0.8"></span>
-                                                    <span class="uk-rating-filled"
-                                                        data-uk-icon="icon: star; ratio: 0.8"></span>
-                                                    <span class="uk-rating-filled"
-                                                        data-uk-icon="icon: star; ratio: 0.8"></span>
-                                                    <span class="uk-rating-filled"
-                                                        data-uk-icon="icon: star; ratio: 0.8"></span>
-                                                    <span data-uk-icon="icon: star; ratio: 0.8"></span>
+                        <div class="container">
+                            <div class="feedback-list__add-feedback-wrapper">
+                                <div class="feedback-form">
+                                    <form action="#" method="post">
+                                        <div class="feedback-form__heading">
+                                            <div class="media">
+                                                <img class="mr-3 rounded-circle"
+                                                    src="{{ current_user.avatar(128) }}"
+                                                    alt="USER" width="50" height="50">
+                                                <div class="media-body feedback-form__recipe-title">
+                                                    {{current_user.name}}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="uk-position-top-right uk-position-small uk-hidden-hover"><a
-                                                class="uk-link-muted" href="recipe.html#">Reply</a>
+                                        <div class="feedback-form__rating">
+                                            <p class="feedback-form__field-label">
+                                                Your Rating
+                                                <span class="feedback-form__field-requirement">(required)</span>
+                                            </p>
+                                            <!-- <div class="star-rating">
+                                                <div class="star-rating__stars">
+                                                    <label for="star-1" class="star-rating__star" tabindex="0">
+                                                        <span class="is-screenreader-only">Rate this a 1</span>
+                                                        <input id="star-1" type="radio"
+                                                            class="star-rating__input is-screenreader-only" value="1"
+                                                            tabindex="-1">
+                                                    </label>
+                                                    <label for="star-2" class="star-rating__star" tabindex="0">
+                                                        <span class="is-screenreader-only">Rate this a 2</span>
+                                                        <input id="star-2" type="radio"
+                                                            class="star-rating__input is-screenreader-only" value="2"
+                                                            tabindex="-1">
+                                                    </label>
+                                                    <label for="star-3" class="star-rating__star" tabindex="0">
+                                                        <span class="is-screenreader-only">Rate this a 3</span>
+                                                        <input id="star-3" type="radio"
+                                                            class="star-rating__input is-screenreader-only" value="3"
+                                                            tabindex="-1">
+                                                    </label>
+                                                    <label for="star-4" class="star-rating__star" tabindex="0">
+                                                        <span class="is-screenreader-only">Rate this a 4</span>
+                                                        <input id="star-4" type="radio"
+                                                            class="star-rating__input is-screenreader-only" value="4"
+                                                            tabindex="-1">
+                                                    </label>
+                                                    <label for="star-5" class="star-rating__star" tabindex="0">
+                                                        <span class="is-screenreader-only">Rate this a 5</span>
+                                                        <input id="star-5" type="radio"
+                                                            class="star-rating__input is-screenreader-only" value="5"
+                                                            tabindex="-1">
+                                                    </label>
+                                                </div>
+                                            </div> -->
                                         </div>
-                                    </header>
-                                    <div class="uk-comment-body">
-                                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                                            nonumy
-                                            eirmod tempor invidunt ut labore et
-                                            dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                                            accusam et
-                                            justo duo dolores et ea rebum. Stet
-                                            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                                            sit
+                                        <div class="feedback-form__review">
+                                            <label for="feedback-user-review" class="feedback-form__field-label">
+                                                Your Comment
+                                                <span class="feedback-form__field-requirement">(required)</span>
+                                            </label>
+                                            <textarea id="feedback-user-review" rows="4" name="feedback-user-review"
+                                                class="form-control feedback-form__input"
+                                                placeholder="What did you think about this recipe? Did you make any changes or notes?">
+                                            </textarea>
+                                        </div>
+                                        <div class="feedback-form__actions">
+                                            <button class="btn btn-secondary feedback-form__cancel"
+                                                data-click-tracked="false">
+                                                Cancel
+                                            </button>
+                                            <button class="btn btn-primary feedback-form__submit"
+                                                data-click-tracked="false" type="submit" disabled="disabled">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="list-unstyled mt-4">
+                            <li>
+                                <div class="media">
+                                    <img class="mr-3 rounded-circle"
+                                        src="{{ current_user.avatar(128) }}" alt="User"
+                                        width="50" height="50">
+                                    <div class="media-body">
+                                        <h4 class="mt-0"><a href="#">{{current_user.name}}</a></h4>
+                                        <p class="text-muted small"><a href="#">12 days ago</a></p>
+                                        <div class="d-flex">
+                                            <div class="mr-2">
+                                                <span class="text-warning" data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                <span class="text-warning" data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                <span class="text-warning" data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                <span class="text-warning" data-uk-icon="icon: star; ratio: 0.8"></span>
+                                                <span class="text-warning" data-uk-icon="icon: star; ratio: 0.8"></span>
+                                            </div>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                                            eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+                                            voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+                                            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
                                             amet.</p>
                                     </div>
-                                </article>
-                                <ul>
-                                    <li>
-                                        <article
-                                            class="uk-comment uk-comment-primary uk-visible-toggle uk-border-rounded"
-                                            tabindex="-1">
-                                            <header class="uk-comment-header uk-position-relative">
-                                                <div class="uk-grid-medium uk-flex-middle" data-uk-grid>
-                                                    <div class="uk-width-auto">
-                                                        <img class="uk-comment-avatar uk-border-circle"
-                                                            src="https://source.unsplash.com/eSjmZW97cH8/100x100"
-                                                            width="50" height="50" alt="Tom Solender">
-                                                    </div>
-                                                    <div class="uk-width-expand">
-                                                        <h4 class="uk-comment-title uk-margin-remove"><a
-                                                                class="uk-link-reset" href="recipe.html#">Tom
-                                                                Solender</a></h4>
-                                                        <p class="uk-comment-meta uk-margin-remove-top"><a
-                                                                class="uk-link-reset" href="recipe.html#">12
-                                                                days
-                                                                ago</a></p>
-                                                    </div>
-                                                </div>
-                                                <div class="uk-position-top-right uk-position-small uk-hidden-hover">
-                                                    <a class="uk-link-muted" href="recipe.html#">Reply</a>
-                                                </div>
-                                            </header>
-                                            <div class="uk-comment-body">
-                                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                                    diam
-                                                    nonumy eirmod tempor invidunt ut labore
-                                                    et dolore magna aliquyam erat, sed diam voluptua. At vero
-                                                    eos et
-                                                    accusam et justo duo dolores et ea rebum.
-                                                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                                                    ipsum
-                                                    dolor sit amet.</p>
-                                            </div>
-                                        </article>
-                                    </li>
-                                    <li>
-                                        <article class="uk-comment uk-visible-toggle" tabindex="-1">
-                                            <header class="uk-comment-header uk-position-relative">
-                                                <div class="uk-grid-medium uk-flex-middle" data-uk-grid>
-                                                    <div class="uk-width-auto">
-                                                        <img class="uk-comment-avatar uk-border-circle"
-                                                            src="https://source.unsplash.com/EGVccebWodM/100x100"
-                                                            width="50" height="50" alt="Alice Thomson">
-                                                    </div>
-                                                    <div class="uk-width-expand">
-                                                        <h4 class="uk-comment-title uk-margin-remove"><a
-                                                                class="uk-link-reset" href="recipe.html#">Alice
-                                                                Thomson</a></h4>
-                                                        <p class="uk-comment-meta uk-margin-remove"><a
-                                                                class="uk-link-reset" href="recipe.html#">12
-                                                                days
-                                                                ago</a></p>
-                                                        <div class="uk-rating">
-                                                            <span class="uk-rating-filled"
-                                                                data-uk-icon="icon: star; ratio: 0.8"></span>
-                                                            <span class="uk-rating-filled"
-                                                                data-uk-icon="icon: star; ratio: 0.8"></span>
-                                                            <span class="uk-rating-filled"
-                                                                data-uk-icon="icon: star; ratio: 0.8"></span>
-                                                            <span class="uk-rating-filled"
-                                                                data-uk-icon="icon: star; ratio: 0.8"></span>
-                                                            <span data-uk-icon="icon: star; ratio: 0.8"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="uk-position-top-right uk-position-small uk-hidden-hover">
-                                                    <a class="uk-link-muted" href="recipe.html#">Reply</a>
-                                                </div>
-                                            </header>
-                                            <div class="uk-comment-body">
-                                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                                    diam
-                                                    nonumy eirmod tempor invidunt ut labore
-                                                    et dolore magna aliquyam erat, sed diam voluptua. At vero
-                                                    eos et
-                                                    accusam et justo duo dolores et ea rebum.
-                                                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                                                    ipsum
-                                                    dolor sit amet.</p>
-                                            </div>
-                                        </article>
-                                    </li>
-                                </ul>
+                                </div>
                             </li>
                         </ul>
+
                     </div>
                 </div>
                 <div class="ingredients">
