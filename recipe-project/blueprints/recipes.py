@@ -47,8 +47,21 @@ def search():
         decoded_search_query = unquote(search_query)
         # Perform a search for recipes with the decoded search query
         recipes = search_recipes(decoded_search_query)
+
+        # pagination parameters
+        page = request.args.get(get_page_parameter(), type=int, default=1)
+        per_page = 10  # You can adjust the number of recipes per page
+        offset = (page - 1) * per_page
+        total = len(recipes)
+
+        pagination_recipes = recipes[offset:offset + per_page]
+        pagination = Pagination(page=page, total=total, per_page=per_page)
+
         # Render the main page
-        return render_template('main/search_recipe.html', recipes=recipes, search_query=decoded_search_query)
+        return render_template('main/search_recipe.html', recipes=pagination_recipes,
+                               search_query=decoded_search_query, page=page,
+                               per_page=per_page,
+                               pagination=pagination)
 
 
 # Define the main route for the app
@@ -68,13 +81,36 @@ def index():
     # Perform a search for recipes with the decoded search query
     recipes = search_recipes(decoded_search_query)
 
+    # Map the Spoonacular API data to your Recipe model and add to the database
+    for api_recipe in recipes:
+        existing_recipe = Recipe.query.filter_by(
+            spoonacular_id=api_recipe['id']).first()
+
+        if existing_recipe:
+            # Update the existing record if desired
+            existing_recipe.title = api_recipe['title']
+            existing_recipe.description = api_recipe.get('summary', '')
+            existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+            existing_recipe.image_url = api_recipe.get('image', '')
+        else:
+            recipe = Recipe(
+                title=api_recipe['title'],
+                description=api_recipe['summary'],
+                source_url=api_recipe['sourceUrl'],
+                image_url=api_recipe['image'],
+                spoonacular_id=api_recipe['id']
+            )
+            # Add the recipe to the database
+            db.session.add(recipe)
+            db.session.commit()  # Commit the changes to the database
+
     # Render the main page
     return render_template('main/index.html', recipes=recipes, search_query=decoded_search_query)
 
+
 # Function to search for recipes based on the provided query
-
-
 def search_recipes(query):
+    recipes = []
     url = f'https://api.spoonacular.com/recipes/complexSearch'
     params = {
         'apiKey': API_KEY,
@@ -92,13 +128,34 @@ def search_recipes(query):
         # Parse the API response as JSON data
         data = response.json()
         # Return the list of recipe results
-        return data['results']
-    # If the API call is not successful
+        recipes += data['results']
+        # Map the Spoonacular API data to your Recipe model and add to the database
+        for api_recipe in recipes:
+            existing_recipe = Recipe.query.filter_by(
+                spoonacular_id=api_recipe['id']).first()
+
+            if existing_recipe:
+                # Update the existing record if desired
+                existing_recipe.title = api_recipe['title']
+                existing_recipe.description = api_recipe.get('summary', '')
+                existing_recipe.source_url = api_recipe.get('sourceUrl', '')
+                existing_recipe.image_url = api_recipe.get('image', '')
+            else:
+                recipe = Recipe(
+                    title=api_recipe['title'],
+                    description=api_recipe['summary'],
+                    source_url=api_recipe['sourceUrl'],
+                    image_url=api_recipe['image'],
+                    spoonacular_id=api_recipe['id']
+                )
+                # Add the recipe to the database
+                db.session.add(recipe)
+                db.session.commit()  # Commit the changes to the database
+        return recipes
     return []
 
+
 # Function to fetch similar recipes for a given recipe ID
-
-
 def get_similar_recipes(recipe_id, number=10):
     # Build the URL to get similar recipes for the specified recipe ID
     url = f'https://api.spoonacular.com/recipes/{recipe_id}/similar'

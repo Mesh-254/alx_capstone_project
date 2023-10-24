@@ -22,6 +22,7 @@ def add_comment(recipe_id):
 
         # Fetch the recipe from your database using the recipe_id
         recipe = Recipe.query.get(recipe_id)
+        print(recipe)
 
         if not recipe:
             return jsonify({'error': 'Recipe not found'}), 404
