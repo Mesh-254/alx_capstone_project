@@ -11,6 +11,6 @@ class Comment(db.Model, UserMixin):
         'users.user_id'), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey(
         'recipes.recipe_id'), nullable=False)
-    comment_text = db.Column(db.Text, nullable=False)
+    comment_text = db.Column(db.Text, nullable=True)
     comment_date = db.Column(
         db.TIMESTAMP, server_default=db.func.current_timestamp())
