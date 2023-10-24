@@ -198,22 +198,13 @@
                         <div class="container">
                             <div class="feedback-list__add-feedback-wrapper">
                                 <div class="feedback-form">
-                                    <form action="{{url_for('review.add_comment', recipe_id=recipe.id)}}" method="post">
-                                        <div class="feedback-form__heading">
-                                            <div class="media">
-                                                <img class="mr-3 rounded-circle" src="{{ current_user.avatar(128) }}"
-                                                    alt="USER" width="50" height="50">
-                                                <div class="media-body feedback-form__recipe-title">
-                                                    {{current_user.name}}
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <form action="#">
                                         <div class="feedback-form__rating">
                                             <p class="feedback-form__field-label">
                                                 Your Rating
                                                 <span class="feedback-form__field-requirement">(required)</span>
                                             </p>
-                                            <!-- <div class="star-rating">
+                                            <div class="star-rating">
                                                 <div class="star-rating__stars">
                                                     <label for="star-1" class="star-rating__star" tabindex="0">
                                                         <span class="is-screenreader-only">Rate this a 1</span>
@@ -246,7 +237,18 @@
                                                             tabindex="-1">
                                                     </label>
                                                 </div>
-                                            </div> -->
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form action="{{url_for('review.add_comment', recipe_id=recipe.id)}}" method="post">
+                                        <div class="feedback-form__heading">
+                                            <div class="media">
+                                                <img class="mr-3 rounded-circle" src="{{ current_user.avatar(128) }}"
+                                                    alt="USER" width="50" height="50">
+                                                <div class="media-body feedback-form__recipe-title">
+                                                    {{current_user.name}}
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="feedback-form__review">
                                             <label for="feedback-user-review" class="feedback-form__field-label">
@@ -255,14 +257,16 @@
                                             </label>
                                             <textarea id="feedback-user-review" rows="4" name="feedback-user-review"
                                                 class="form-control feedback-form__input"
-                                                placeholder="What did you think about this recipe? Did you make any changes or notes?">
-                                            </textarea>
+                                                placeholder="What did you think about this recipe? Did you make any changes or notes?"></textarea>
+
                                         </div>
                                         <div class="feedback-form__actions">
-                                            <button class="btn btn-secondary feedback-form__cancel" data-click-tracked="false">
+                                            <button class="btn btn-secondary feedback-form__cancel"
+                                                data-click-tracked="false">
                                                 Cancel
                                             </button>
-                                            <button class="btn btn-primary feedback-form__submit" type="submit" name="submit">
+                                            <button class="btn btn-primary feedback-form__submit" type="submit"
+                                                name="submit">
                                                 Submit
                                             </button>
                                         </div>
@@ -270,7 +274,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        {% for x in comment %}
                         <ul class="list-unstyled mt-4">
                             <li>
                                 <div class="media">
@@ -278,7 +282,8 @@
                                         width="50" height="50">
                                     <div class="media-body">
                                         <h4 class="mt-0"><a href="#">{{current_user.name}}</a></h4>
-                                        <p class="text-muted small"><a href="#">12 days ago</a></p>
+                                        <p class="text-muted small"><a href="#">{{x.comment_date.strftime('%Y-%m-%d
+                                                %H:%M:%S')}}</a></p>
                                         <div class="d-flex">
                                             <div class="mr-2">
                                                 <span class="text-warning" data-uk-icon="icon: star; ratio: 0.8"></span>
@@ -288,15 +293,12 @@
                                                 <span class="text-warning" data-uk-icon="icon: star; ratio: 0.8"></span>
                                             </div>
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                            eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                                            voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-                                            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-                                            amet.</p>
+                                        <p>{{x.comment_text}}</p>
                                     </div>
                                 </div>
                             </li>
                         </ul>
+                        {% endfor %}
 
                     </div>
                 </div>

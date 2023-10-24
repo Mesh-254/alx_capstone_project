@@ -10,7 +10,6 @@ class Recipe(db.Model, UserMixin):
     description = db.Column(db.Text)
     source_url = db.Column(db.String(255))
     image_url = db.Column(db.String(255))
-    spoonacular_id = db.Column(db.Integer, unique=True, nullable=False)
     comments = db.relationship('Comment', backref='recipe', lazy=True)
     ratings = db.relationship('Rating', backref='recipe', lazy=True)
 

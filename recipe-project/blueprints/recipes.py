@@ -10,6 +10,7 @@ from urllib.parse import unquote
 
 from models.recipe import Recipe
 from models.database import db
+from models.comment import Comment
 
 
 recipes = Blueprint('recipes', __name__)
@@ -109,7 +110,7 @@ def index():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -123,7 +124,7 @@ def index():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -168,7 +169,7 @@ def search_recipes(query):
         # Map the Spoonacular API data to your Recipe model and add to the database
         for api_recipe in recipes:
             existing_recipe = Recipe.query.filter_by(
-                spoonacular_id=api_recipe['id']).first()
+                recipe_id=api_recipe['id']).first()
 
             if existing_recipe:
                 # Update the existing record if desired
@@ -182,7 +183,7 @@ def search_recipes(query):
                     description=api_recipe['summary'],
                     source_url=api_recipe['sourceUrl'],
                     image_url=api_recipe['image'],
-                    spoonacular_id=api_recipe['id']
+                    recipe_id=api_recipe['id']
                 )
                 # Add the recipe to the database
                 db.session.add(recipe)
@@ -228,11 +229,36 @@ def view_recipe(recipe_id):
     # Fetch similar recipes for the specified recipe
     similar_recipes = get_similar_recipes(recipe_id, number=10)
 
+    # function to that returns all the comments
+    comment = get_comments()
+
     # If the API call is successful
     if response.status_code == 200:
         recipe = response.json()
-        return render_template('main/recipe-detail.html', recipe=recipe, search_query=search_query, similar_recipes=similar_recipes)
+
+        return render_template('main/recipe-detail.html', recipe=recipe, 
+                               search_query=search_query, 
+                               similar_recipes=similar_recipes, comment=comment)
     return "Recipe not found", 404
+
+#Function t0 Query all comments from the Comment model
+def get_comments():
+    comments = Comment.query.all()
+
+    # # a list to store the comment data
+    # comment_data = []
+    # for comment in comments:
+    #     comment_info = {
+    #         'comment_id': comment.comment_id,
+    #         'user_id': comment.user_id,
+    #         'recipe_id': comment.recipe_id,
+    #         'comment_text': comment.comment_text,
+    #         'comment_date': comment.comment_date.strftime('%Y-%m-%d %H:%M:%S')  # Format the date if needed
+    #     }
+    #     comment_data.append(comment_info)
+
+        # Return the comments as JSON
+    return comments
 
 
 # function to show recipes for dish-types
@@ -266,7 +292,7 @@ def recipe_dish_types():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -280,7 +306,7 @@ def recipe_dish_types():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -329,7 +355,7 @@ def recipe_meal_types():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -343,7 +369,7 @@ def recipe_meal_types():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -390,7 +416,7 @@ def recipe_diet_health():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -404,7 +430,7 @@ def recipe_diet_health():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -453,7 +479,7 @@ def recipe_cuisine():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -467,7 +493,7 @@ def recipe_cuisine():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -514,7 +540,7 @@ def recipe_seasonal():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -528,7 +554,7 @@ def recipe_seasonal():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -577,7 +603,7 @@ def recipe_Appetizers():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -591,7 +617,7 @@ def recipe_Appetizers():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -638,7 +664,7 @@ def recipe_bread():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -652,7 +678,7 @@ def recipe_bread():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -699,7 +725,7 @@ def recipe_cake():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -713,7 +739,7 @@ def recipe_cake():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -761,7 +787,7 @@ def recipe_candy():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -775,7 +801,7 @@ def recipe_candy():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -822,7 +848,7 @@ def recipe_casserole():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -836,7 +862,7 @@ def recipe_casserole():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -883,7 +909,7 @@ def recipe_breakfast():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -897,7 +923,7 @@ def recipe_breakfast():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -944,7 +970,7 @@ def recipe_desserts():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -958,7 +984,7 @@ def recipe_desserts():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1005,7 +1031,7 @@ def recipe_dinners():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1019,7 +1045,7 @@ def recipe_dinners():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1066,7 +1092,7 @@ def recipe_lunch():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1080,7 +1106,7 @@ def recipe_lunch():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1128,7 +1154,7 @@ def recipe_diabetic():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1142,7 +1168,7 @@ def recipe_diabetic():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1190,7 +1216,7 @@ def recipe_gluten_free():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1204,7 +1230,7 @@ def recipe_gluten_free():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1251,7 +1277,7 @@ def recipe_high_fiber():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1265,7 +1291,7 @@ def recipe_high_fiber():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1312,7 +1338,7 @@ def recipe_low_calorie():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1326,7 +1352,7 @@ def recipe_low_calorie():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1373,7 +1399,7 @@ def recipe_chinese():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1387,7 +1413,7 @@ def recipe_chinese():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1434,7 +1460,7 @@ def recipe_indian():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1448,7 +1474,7 @@ def recipe_indian():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1495,7 +1521,7 @@ def recipe_italian():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1509,7 +1535,7 @@ def recipe_italian():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1556,7 +1582,7 @@ def recipe_mexican():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1570,7 +1596,7 @@ def recipe_mexican():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1617,7 +1643,7 @@ def recipe_baby_shower():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1631,7 +1657,7 @@ def recipe_baby_shower():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1678,7 +1704,7 @@ def recipe_birthday():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1692,7 +1718,7 @@ def recipe_birthday():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1739,7 +1765,7 @@ def recipe_christmas():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1753,7 +1779,7 @@ def recipe_christmas():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
@@ -1800,7 +1826,7 @@ def recipe_halloween():
     # Map the Spoonacular API data to your Recipe model and add to the database
     for api_recipe in recipes:
         existing_recipe = Recipe.query.filter_by(
-            spoonacular_id=api_recipe['id']).first()
+            recipe_id=api_recipe['id']).first()
 
         if existing_recipe:
             # Update the existing record if desired
@@ -1814,7 +1840,7 @@ def recipe_halloween():
                 description=api_recipe['summary'],
                 source_url=api_recipe['sourceUrl'],
                 image_url=api_recipe['image'],
-                spoonacular_id=api_recipe['id']
+                recipe_id=api_recipe['id']
             )
             # Add the recipe to the database
             db.session.add(recipe)
