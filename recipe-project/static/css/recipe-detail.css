@@ -557,7 +557,7 @@ main::before {
 .rating-icon {
   width: 16px;
   height: 16px;
-  background: url("path-to-rating-icon.png") center center no-repeat; /* Replace with your rating icon image */
+  background: url("filled-star.svg") center center no-repeat; /* Replace with your rating icon image */
   background-size: cover;
   margin-right: 5px; /* Adjust the spacing */
 }
@@ -610,6 +610,8 @@ main::before {
 .view-item:hover {
   opacity: 1.3;
 }
+
+/* RATING DIVISION STYLING */
 
 
 /* FOOTER SECTION */

@@ -66,3 +66,6 @@ menuClose.addEventListener('click', () => {
 });
 
 
+
+
+// JavaScript to handle the star rating selection and form submission

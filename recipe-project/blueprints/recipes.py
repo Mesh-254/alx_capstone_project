@@ -230,7 +230,7 @@ def view_recipe(recipe_id):
     similar_recipes = get_similar_recipes(recipe_id, number=10)
 
     # function to that returns all the comments
-    comment = get_comments()
+    comment = get_comments(recipe_id)
 
     # If the API call is successful
     if response.status_code == 200:
@@ -242,8 +242,12 @@ def view_recipe(recipe_id):
     return "Recipe not found", 404
 
 #Function t0 Query all comments from the Comment model
-def get_comments():
-    comments = Comment.query.all()
+def get_comments(recipe_id):
+    comments = Comment.query.filter(Comment.recipe_id == recipe_id).all()
+
+    if comments:
+        return comments
+    return []
 
     # # a list to store the comment data
     # comment_data = []
@@ -258,7 +262,6 @@ def get_comments():
     #     comment_data.append(comment_info)
 
         # Return the comments as JSON
-    return comments
 
 
 # function to show recipes for dish-types

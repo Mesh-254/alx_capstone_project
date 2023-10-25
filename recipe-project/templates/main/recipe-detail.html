@@ -16,6 +16,8 @@
     <!-- Add the Bootstrap CSS from the CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
+
 
     <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -194,62 +196,62 @@
                         <a href="/?search_query={{ search_query }}">Back to search results</a>
 
                         <hr style="border: 1px solid black;">
-                        <h3>Comments</h3>
+
                         <div class="container">
                             <div class="feedback-list__add-feedback-wrapper">
                                 <div class="feedback-form">
-                                    <form action="#">
+                                    <div class="feedback-form__heading">
+                                        <div class="media">
+                                            <img class="mr-3 rounded-circle" src="{{ current_user.avatar(128) }}"
+                                                alt="USER" width="50" height="50">
+                                            <div class="media-body feedback-form__recipe-title">
+                                                <h3>{{current_user.name}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3>Rating</h3>
+                                    {% with messages = get_flashed_messages() %}
+                                    {% if messages %}
+                                    <ul>
+                                        {% for message in messages %}
+                                        <li>{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                    {% endwith %}
+                                    <form action="{{ url_for('review.submit_rating', recipe_id=recipe.id) }}"
+                                        method="post">
+                                        <!-- Added hidden input for rating -->
                                         <div class="feedback-form__rating">
                                             <p class="feedback-form__field-label">
                                                 Your Rating
                                                 <span class="feedback-form__field-requirement">(required)</span>
                                             </p>
                                             <div class="star-rating">
-                                                <div class="star-rating__stars">
-                                                    <label for="star-1" class="star-rating__star" tabindex="0">
-                                                        <span class="is-screenreader-only">Rate this a 1</span>
-                                                        <input id="star-1" type="radio"
-                                                            class="star-rating__input is-screenreader-only" value="1"
-                                                            tabindex="-1">
-                                                    </label>
-                                                    <label for="star-2" class="star-rating__star" tabindex="0">
-                                                        <span class="is-screenreader-only">Rate this a 2</span>
-                                                        <input id="star-2" type="radio"
-                                                            class="star-rating__input is-screenreader-only" value="2"
-                                                            tabindex="-1">
-                                                    </label>
-                                                    <label for="star-3" class="star-rating__star" tabindex="0">
-                                                        <span class="is-screenreader-only">Rate this a 3</span>
-                                                        <input id="star-3" type="radio"
-                                                            class="star-rating__input is-screenreader-only" value="3"
-                                                            tabindex="-1">
-                                                    </label>
-                                                    <label for="star-4" class="star-rating__star" tabindex="0">
-                                                        <span class="is-screenreader-only">Rate this a 4</span>
-                                                        <input id="star-4" type="radio"
-                                                            class="star-rating__input is-screenreader-only" value="4"
-                                                            tabindex="-1">
-                                                    </label>
-                                                    <label for="star-5" class="star-rating__star" tabindex="0">
-                                                        <span class="is-screenreader-only">Rate this a 5</span>
-                                                        <input id="star-5" type="radio"
-                                                            class="star-rating__input is-screenreader-only" value="5"
-                                                            tabindex="-1">
-                                                    </label>
+                                                <div class="row align-items-center">
+                                                    <div class="col">
+                                                        <label for="rating" class="font-weight-bold"
+                                                            style="font-size: 16px;">(Choose between 1 and 5):</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="number" id="rating" name="rating"
+                                                            class="form-control" style="width: 60px; font-size: 16px;"  min="1" max="5">
+                                                    </div>
+                                                    <div class="col">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
                                                 </div>
                                             </div>
+
+
                                         </div>
                                     </form>
+
+                                    <hr style="border: 1px solid black;">
+
+                                    <h3>Comments</h3>
                                     <form action="{{url_for('review.add_comment', recipe_id=recipe.id)}}" method="post">
-                                        <div class="feedback-form__heading">
-                                            <div class="media">
-                                                <img class="mr-3 rounded-circle" src="{{ current_user.avatar(128) }}"
-                                                    alt="USER" width="50" height="50">
-                                                <div class="media-body feedback-form__recipe-title">
-                                                    {{current_user.name}}
-                                                </div>
-                                            </div>
-                                        </div>
+
                                         <div class="feedback-form__review">
                                             <label for="feedback-user-review" class="feedback-form__field-label">
                                                 Your Comment
