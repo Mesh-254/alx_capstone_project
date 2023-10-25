@@ -60,6 +60,7 @@
                 </nav>
             </aside>
             <section class="col-md-9">
+                <div class="recipe-items"></div>
                 <div class="content bg-light p-4 rounded">
                     {% block content %}
 
@@ -68,6 +69,9 @@
             </section>
         </div>
         <!-- JS Scripts -->
+
+        <script src="{{ url_for('static', filename ='js/profile.js') }}"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
         <!-- End of js scripts -->
 </body>

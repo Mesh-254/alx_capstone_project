@@ -139,6 +139,8 @@ def index():
     pagination_recipes = recipes[offset:offset + per_page]
     pagination = Pagination(page=page, total=total, per_page=per_page)
 
+    
+
     # Render the index page
     return render_template('main/index.html', recipes=pagination_recipes,
                            search_query=decoded_search_query, page=page,
@@ -207,8 +209,16 @@ def get_similar_recipes(recipe_id, number=10):
 
     # If the API call is successful, return the list of similar recipes
     if response.status_code == 200:
-        similar_recipes = response.json()
-        return similar_recipes
+        similar_recipe = response.json()
+        similar_recipe_ids = []
+        if "recipes" in similar_recipe:
+            for recipe in similar_recipe["recipes"]:
+                similar_recipe_ids.append(recipe["id"])
+        for similar_recipe_id in similar_recipe_ids:
+            recipe_details_url = f"https://api.spoonacular.com/recipes/{similar_recipe_id}/information?apiKey={API_KEY}"
+            recipe_details_response = requests.get(recipe_details_url)
+            similar_recipes = recipe_details_response.json()  
+            return similar_recipes
     return []  # Return an empty list if the API call fails
 
 
@@ -240,10 +250,18 @@ def view_recipe(recipe_id):
     # Get all ratings for the recipe
     all_ratings = Rating.query.filter_by(recipe_id=recipe_id).all()
 
-    # Calculate the average rating
-    average_rating = db.session.query(
-        func.avg(Rating.rating)).filter_by(recipe_id=recipe_id).scalar()
-
+    # Check if there are ratings
+    if all_ratings:
+        total_rating = 0
+        for rating in all_ratings:
+            # Calculate the sum of all ratings
+            total_rating += rating.rating
+            
+            # Calculate the average rating
+            average_rating = total_rating / len(all_ratings)
+    else:
+        # Handle the case when there are no ratings
+        average_rating = 0.0
     # If the API call is successful
     if response.status_code == 200:
         recipe = response.json()
@@ -254,9 +272,8 @@ def view_recipe(recipe_id):
                                user_rating=user_rating, average_rating=average_rating)
     return "Recipe not found", 404
 
+
 # Function t0 Query all comments from the Comment model
-
-
 def get_comments(recipe_id):
     comments = Comment.query.filter(Comment.recipe_id == recipe_id).all()
 

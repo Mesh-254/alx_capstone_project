@@ -66,6 +66,77 @@ menuClose.addEventListener('click', () => {
 });
 
 
+// code to handle adding recipes to favorites when heart icon is clicked\
+document.addEventListener("DOMContentLoaded", function () {
+    const recipeItems = document.querySelectorAll(".uk-card");
+
+    recipeItems.forEach(function (recipeItem, index) {
+        const heartIcon = recipeItem.querySelector(".heart-icon a");
+        const recipeData = recipeItem.querySelector(".recipe-data");
+
+        // Add a unique identifier to the uk-card element, e.g., data-recipe-id
+        recipeItem.setAttribute("data-recipe-id", index);
+
+        // Add a click event listener to the heart icon
+        heartIcon.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            // Retrieve the recipe information
+            const title = recipeData.querySelector(".uk-card-title").textContent;
+
+            // Retrieve the image source
+            const imageSrc = recipeItem.querySelector("img").getAttribute("src");
+
+            // Create an object to store the recipe data
+            const recipe = {
+                id: recipeItem.getAttribute("data-recipe-id"),
+                title: title,
+                imageSrc: imageSrc, // Add the image source to the object
+            };
+            // Check if the recipe is already in local storage
+            const existingRecipe = localStorage.getItem(`recipe-${recipe.id}`);
+
+            if (existingRecipe) {
+                alert("Recipe is already in favorites!");
+            } else {
+                // Change the heart icon color to red
+                heartIcon.querySelector("svg path").setAttribute("fill", "red");
+
+                // Add the recipe to local storage (you can customize the key)
+                localStorage.setItem(`recipe-${recipe.id}`, JSON.stringify(recipe));
+
+                // Display a confirmation message (you can customize this part)
+                alert("Recipe added to favorites!");
+            }
+        });
+    });
+});
 
 
-// JavaScript to handle the star rating selection and form submission
+// code To create a shopping list from the HTML list 
+// Add an event listener to the "Generate PDF" button
+document.getElementById('generate-pdf').addEventListener('click', function () {
+    // Extract list items
+    const listItems = document.querySelectorAll('.custom-list li');
+
+    // an empty array to store the shopping list items
+    const shoppingList = [];
+    listItems.forEach(function (item) {
+      shoppingList.push(item.textContent);
+    });
+
+    // Generate a shopping list as a string
+    const shoppingListText = shoppingList.join('\n');
+
+    // Create a PDF
+    html2pdf().from(shoppingListText).outputPdf(function (pdf) {
+      // Download the PDF
+      const pdfBlob = new Blob([pdf], { type: 'application/pdf' });
+      const url = URL.createObjectURL(pdfBlob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'shopping-list.pdf';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  });
