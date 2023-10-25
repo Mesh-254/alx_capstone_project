@@ -30,12 +30,12 @@ def login_post():
     # Check if the user already exists
     user = User.query.filter_by(email=email).first()
     if not user:
-        flash('You are not registered. Please signup now.', 'danger')
+        flash('You are not registered. Please signup now.', category="danger")
         # Redirect to the signup page if the user doesn't exist
         return redirect(url_for('auth.signup'))
 
     if not check_password_hash(user.password, password):
-        flash('Please check your login details and try again.', 'danger')
+        flash('Please check your login details and try again.', category='danger')
         # Redirect to the login page if the password is incorrect
         return redirect(url_for('auth.login'))
     else:
@@ -110,5 +110,4 @@ def signup():
 @auth.route('/logout')
 def logout():
     logout_user()
-    session.clear()
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('recipes.index'))

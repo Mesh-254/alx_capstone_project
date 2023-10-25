@@ -16,20 +16,23 @@
 <body>
     <div class="login-page">
         <div class="login-section">
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <ul>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% endwith %}
             <div class="login">
                 <div class="heading">
                     <h1 class="heading-text">Sign In to <span class="logo">FlavorRover</span></h1>
                 </div>
             </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{category}} alert-dismissible fade show" role="alert" align="center">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
             <div class="uk-text-center">
                 <h4 class="text-center text-info"> Use your email account:</h4>
             </div>

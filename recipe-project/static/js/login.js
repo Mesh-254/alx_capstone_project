@@ -7,10 +7,12 @@ function validateEmail() {
     let email = document.getElementById('email').value;
     if (email.length === 0) {
         emailError.innerText = "Enter an Email Address";
+        emailError.style.color = "red";
         return false;
     }
     if (!email.match(/^[a-zA-Z\]\._\-[0-9]*[@][a-zA-Z]*[\.][a-z]{2,}$/)) {
         emailError.innerText = "Enter valid email address";
+        emailError.style.color = "red";
         return false;
     }
     emailError.innerText = 'Valid'
@@ -34,23 +36,28 @@ function validatePassword() {
 
     if (!uppercaseRegex.test(password)) {
         passwordError.innerHTML = "The password must contain at least one uppercase letter.";
+        passwordError.style.color = 'red';
         return false;
     }
     if (!lowercaseRegex.test(password)) {
         passwordError.innerHTML = "The password must contain at least one lowercase letter.";
+        passwordError.style.color = 'red';
         return false;
     }
     // check if password contains at least one numeric digit.
     if (!digitRegex.test(password)) {
         passwordError.textContent = "The password must contain at least one numeric digit";
+        passwordError.style.color = 'red';
         return false;
     }
     if (!specialCharRegex.test(password)) {
         passwordError.textContent = "The password must contain at least one special character (e.g., !@#$%^&*)";
+        passwordError.style.color = 'red';
         return false;
     }
     if (!lengthRegex.test(password)) {
         passwordError.innerHTML = "The password must be at least 8 characters long.";
+        passwordError.style.color = 'red';
         return false;
     }
 

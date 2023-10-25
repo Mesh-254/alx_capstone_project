@@ -60,8 +60,13 @@
                     </div>
                 </form>
                 <div class="authentication">
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('user.profile', email=current_user.email) }}">Profile</a>
+                    <a href="/logout">Logout</a>
+                    {% else %}
                     <a href="/login">Sign In</a>
                     <a href="/signup"><button>Sign Up</button></a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -70,6 +75,13 @@
             <li><a href="/search">Search</a></li>
             <li><a href="/">Recipe</a></li>
             <li><a href="#">Contact</a></li>
+            {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('user.profile', email=current_user.email) }}">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+            {% else %}
+            <li><a href="/login">Sign In</a></li>
+            <li><a href="/signup"><button>Sign Up</button></a></li>
+            {% endif %}
         </ul>
     </header>
     <!-- End of header section -->
@@ -185,9 +197,11 @@
                 </a>
             </div>
             {% endif %}
-            <h3 class="uk-card-title">{{ recipe.title }}</h3>
-            <a href="{{ url_for('recipes.view_recipe', recipe_id=recipe.id, search_query=search_query) }}"
-                class="view-item">View</a>
+            <div class="recipe-data">
+                <h3 class="uk-card-title">{{ recipe.title }}</h3>
+                <a href="{{ url_for('recipes.view_recipe', recipe_id=recipe.id, search_query=search_query) }}"
+                    class="view-item">View</a>
+            </div>
         </li>
         {% endfor %}
     </ul>
