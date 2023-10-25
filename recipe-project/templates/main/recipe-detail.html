@@ -205,7 +205,7 @@
                                             <img class="mr-3 rounded-circle" src="{{ current_user.avatar(128) }}"
                                                 alt="USER" width="50" height="50">
                                             <div class="media-body feedback-form__recipe-title">
-                                                <h3>{{current_user.name}}</h3>
+                                                <h3 style="color: rgba(235, 74, 54, 1);">{{current_user.name}}</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -287,13 +287,7 @@
                                         <p class="text-muted small"><a href="#">{{x.comment_date.strftime('%Y-%m-%d
                                                 %H:%M:%S')}}</a></p>
                                         <div class="d-flex">
-                                            <div class="mr-2">
-                                                <span class="text-warning" data-uk-icon="icon: star; ratio: 0.8"></span>
-                                                <span class="text-warning" data-uk-icon="icon: star; ratio: 0.8"></span>
-                                                <span class="text-warning" data-uk-icon="icon: star; ratio: 0.8"></span>
-                                                <span class="text-warning" data-uk-icon="icon: star; ratio: 0.8"></span>
-                                                <span class="text-warning" data-uk-icon="icon: star; ratio: 0.8"></span>
-                                            </div>
+                                            <p>Your Rating: {{ user_rating.rating if user_rating else 'N/A' }}</p>
                                         </div>
                                         <p>{{x.comment_text}}</p>
                                     </div>

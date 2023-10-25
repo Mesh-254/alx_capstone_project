@@ -3,15 +3,17 @@
 from flask import *
 from flask_paginate import Pagination, get_page_parameter
 from flask.cli import load_dotenv
+from flask_login import current_user
 import os
 import requests
 from urllib.parse import unquote
 
+from sqlalchemy import func
 
 from models.recipe import Recipe
 from models.database import db
 from models.comment import Comment
-
+from models.rating import Rating
 
 recipes = Blueprint('recipes', __name__)
 
@@ -96,10 +98,9 @@ def index():
 
         # Render the index page
         return render_template('main/index.html', recipes=pagination_recipes,
-                                search_query=query, page=page,
-                                per_page=per_page,
-                                pagination=pagination)
-
+                               search_query=query, page=page,
+                               per_page=per_page,
+                               pagination=pagination)
 
     # If it's a GET request or no form submitted
     search_query = request.args.get('search_query', '')
@@ -140,9 +141,9 @@ def index():
 
     # Render the index page
     return render_template('main/index.html', recipes=pagination_recipes,
-                            search_query=decoded_search_query, page=page,
-                            per_page=per_page,
-                            pagination=pagination)
+                           search_query=decoded_search_query, page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 # Function to search for recipes based on the provided query
@@ -232,36 +233,36 @@ def view_recipe(recipe_id):
     # function to that returns all the comments
     comment = get_comments(recipe_id)
 
+    # Get user rating for the specific recipe
+    user_rating = Rating.query.filter_by(
+        recipe_id=recipe_id, user_id=current_user.user_id).first()
+
+    # Get all ratings for the recipe
+    all_ratings = Rating.query.filter_by(recipe_id=recipe_id).all()
+
+    # Calculate the average rating
+    average_rating = db.session.query(
+        func.avg(Rating.rating)).filter_by(recipe_id=recipe_id).scalar()
+
     # If the API call is successful
     if response.status_code == 200:
         recipe = response.json()
 
-        return render_template('main/recipe-detail.html', recipe=recipe, 
-                               search_query=search_query, 
-                               similar_recipes=similar_recipes, comment=comment)
+        return render_template('main/recipe-detail.html', recipe=recipe,
+                               search_query=search_query,
+                               similar_recipes=similar_recipes, comment=comment,
+                               user_rating=user_rating, average_rating=average_rating)
     return "Recipe not found", 404
 
-#Function t0 Query all comments from the Comment model
+# Function t0 Query all comments from the Comment model
+
+
 def get_comments(recipe_id):
     comments = Comment.query.filter(Comment.recipe_id == recipe_id).all()
 
     if comments:
         return comments
     return []
-
-    # # a list to store the comment data
-    # comment_data = []
-    # for comment in comments:
-    #     comment_info = {
-    #         'comment_id': comment.comment_id,
-    #         'user_id': comment.user_id,
-    #         'recipe_id': comment.recipe_id,
-    #         'comment_text': comment.comment_text,
-    #         'comment_date': comment.comment_date.strftime('%Y-%m-%d %H:%M:%S')  # Format the date if needed
-    #     }
-    #     comment_data.append(comment_info)
-
-        # Return the comments as JSON
 
 
 # function to show recipes for dish-types
