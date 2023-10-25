@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Module for user reviews and ratings """
 from flask import *
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 from models.user import User
 from models.recipe import Recipe
@@ -12,7 +12,7 @@ from models.database import db
 
 review = Blueprint('review', __name__)
 
-
+@login_required
 @review.route('/add_comment/<int:recipe_id>', methods=['POST'])
 def add_comment(recipe_id):
     """Function to add a new comment"""
@@ -22,7 +22,7 @@ def add_comment(recipe_id):
         # Check if the user is authenticated
         if not current_user.is_authenticated:
             # Return a JSON response with an error message and status code 401 (Unauthorized)
-            flash('You are not logged in')
+            flash('You are not logged in', 'danger')
             return redirect(url_for('auth.login'))
         
         # Get the comment text from the form data
@@ -50,18 +50,17 @@ def add_comment(recipe_id):
         flash('comment submitted successfully', 'success')
         return redirect(url_for('recipes.view_recipe', recipe_id=recipe_id))
 
-    flash('Error in form')
+    flash('Error in form', 'danger')
     return redirect(url_for('recipes.view_recipe', recipe_id=recipe_id))
 
-
-@review.route('/submit-rating/<int:recipe_id>', methods=['GET', 'POST'])
+@login_required
 @review.route('/submit-rating/<int:recipe_id>', methods=['POST'])
 def submit_rating(recipe_id):
     """Function to add or update a rating for a recipe"""
     if request.method == 'POST':
         if not current_user.is_authenticated:
             # Redirect to the login page
-            flash('You are not logged in')
+            flash('You are not logged in', 'danger')
             return redirect(url_for('auth.login'))
 
         # Get the rating value from the request and convert it to an integer
@@ -78,7 +77,7 @@ def submit_rating(recipe_id):
         else:
             # Create a new Rating object and save it to the database
             new_rating = Rating(
-                user_id=current_user.id,
+                user_id=current_user.user_id,
                 recipe_id=recipe_id,
                 rating=rating
             )
@@ -89,5 +88,5 @@ def submit_rating(recipe_id):
             flash('Rating submitted successfully', 'success')
         return redirect(url_for('recipes.view_recipe', recipe_id=recipe_id))
 
-    flash('Error in form')
+    flash('Error in form', 'danger')
     return redirect(url_for('recipes.view_recipe', recipe_id=recipe_id))

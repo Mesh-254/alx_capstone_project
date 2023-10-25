@@ -35,7 +35,7 @@ def login_post():
         return redirect(url_for('auth.signup'))
 
     if not check_password_hash(user.password, password):
-        flash('Please check your login details and try again.')
+        flash('Please check your login details and try again.', 'danger')
         # Redirect to the login page if the password is incorrect
         return redirect(url_for('auth.login'))
     else:
@@ -58,27 +58,27 @@ def signup():
 
         # Check if the entered password matches the confirmation password
         if password != confirm_password:
-            flash("Passwords do not match")
+            flash("Passwords do not match", 'danger')
             return redirect(url_for('auth.signup'))
 
         # Check if the password length is at least 8 characters
         if len(password) < 8 or len(confirm_password) < 8:
-            flash("Password must be at least 8 characters long.")
+            flash("Password must be at least 8 characters long.", 'danger')
             return redirect(url_for('auth.signup'))
 
         # Check if the password contains at least one lowercase and one uppercase letter
         if not re.search(r'[a-z]', password) or not re.search(r'[A-Z]', password):
-            flash("Password must contain both uppercase and lowercase characters.")
+            flash("Password must contain both uppercase and lowercase characters.", 'danger')
             return redirect(url_for('auth.signup'))
 
         # Check if the password contains at least one digit
         if not re.search(r'\d', password):
-            flash("Password must contain at least one digit.")
+            flash("Password must contain at least one digit.", 'danger')
             return redirect(url_for('auth.signup'))
 
         # Check if the password contains at least one special character
         if not re.search(r'[!@#$%^&*()_+{}[\]:;<>,.?~\\-]', password):
-            flash("Password must contain at least one special character.")
+            flash("Password must contain at least one special character.", 'danger')
             return redirect(url_for('auth.signup'))
 
         # Email validation
@@ -91,7 +91,7 @@ def signup():
         # Check if the email is already in use
         user = User.query.filter_by(email=email).first()
         if user:
-            flash("Email address already taken.")
+            flash("Email address already taken.", 'danger')
             return redirect(url_for('auth.signup'))
 
         # Create a new user and add them to the database
@@ -100,7 +100,7 @@ def signup():
 
         db.session.add(new_user)
         db.session.commit()
-        flash("Account created successfully! You can log in below.")
+        flash("Account created successfully! You can log in below.", 'success')
         return redirect(url_for('auth.login'))
 
     # Render the signup form if it's a GET request

@@ -748,7 +748,7 @@ p {
   margin: 20px 0;
 }
 .feedback-form__submit {
-  background-color: seagreen; /* Light gray background */
+  background-color: #007bff; /* Light gray background */
   color: #ffffff; /* Dark text color */
   font-weight: bold;
   border: none;
@@ -767,11 +767,11 @@ p {
 }
 
 .feedback-form__cancel:hover{
-  opacity: 0.3;/* Darker gray color on hover */
+  opacity: var(--color-red);/* Darker gray color on hover */
 }
 
 .feedback-form__submit:hover {
- 
+ background-color: seagreen;
 }
 
 /* FOOTER SECTION */
