@@ -1,5 +1,59 @@
 {% extends 'user/profile.html' %}
 {% block title %}Favorite Recipes{%endblock%}
 {% block content %}
+<h1>Favorite Recipes</h1>
+<ul class="recipe-items">
+    <!-- JavaScript will populate this list -->
+</ul>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Fetch favorite recipes from localStorage
+        const favoriteRecipes = Object.keys(localStorage)
+            .filter(key => key.startsWith("recipe-"))
+            .map(key => JSON.parse(localStorage.getItem(key)));
+        // Get the list element to display the favorite recipes
+        const favoriteRecipesList = document.querySelector(".recipe-items");
+
+
+        if (favoriteRecipes.length === 0) {
+            // Display a message if there are no favorite recipes
+            const noFavoritesMessage = document.createElement("p");
+            noFavoritesMessage.textContent = "No favorite recipes yet.";
+            favoriteRecipesList.appendChild(noFavoritesMessage);
+        } else {
+            // Populate the list with favorite recipes
+            favoriteRecipes.forEach(recipe => {
+                const listItem = document.createElement("li");
+                listItem.className = "uk-card";
+
+                const imageElement = document.createElement("img");
+                imageElement.src = recipe.imageSrc;
+                imageElement.alt = recipe.title;
+                imageElement.className = ".card-image "
+
+                const h3Element = document.createElement("h3");
+                h3Element.textContent = recipe.title;
+                h3Element.className = "uk-card-title"
+
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "Remove";
+                removeButton.className="remove-btn"
+                removeButton.addEventListener("click", function () {
+                    // Remove the recipe from favorites when the button is clicked
+                    localStorage.removeItem(`recipe-${recipe.id}`);
+                    // Remove the list item from the display
+                    favoriteRecipesList.removeChild(listItem);
+                    alert("Recipe removed from favorites!");
+                });
+
+                listItem.appendChild(imageElement);
+                listItem.appendChild(h3Element);
+                listItem.appendChild(removeButton);
+
+                favoriteRecipesList.appendChild(listItem);
+            });
+        }
+    });
+</script>
 {% endblock %}

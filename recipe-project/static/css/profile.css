@@ -1,91 +1,161 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-image: url('../images/profile-background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("../images/profile-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-.main-section{
-    display: flex;
-    flex-wrap: wrap;
+.main-section {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 header {
-    text-align: center;
-    background-color: #380420;
-    padding: 20px;
-    font-size: 32px;
-    color: white;
-    text-transform: uppercase;
+  text-align: center;
+  background-color: #380420;
+  padding: 20px;
+  font-size: 32px;
+  color: white;
+  text-transform: uppercase;
 }
 
 aside {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 20%;
-    max-width: 300px;
-    float: left;
-    margin: 20px auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 20%;
+  max-width: 300px;
+  float: left;
+  margin: 20px auto;
 }
 
 aside img {
-    display: block;
-    margin: 0 auto;
-    border-radius: 50%;
-    max-width: 128px;
-    border: 2px solid #ff6565;
-    transition: transform 0.3s;
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+  max-width: 128px;
+  border: 2px solid #ff6565;
+  transition: transform 0.3s;
 }
 
 aside img:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 nav ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 nav ul li {
-    margin: 10px 0;
-    text-align: left;
+  margin: 10px 0;
+  text-align: left;
 }
 
 nav ul li a {
-    text-decoration: none;
-    font-size: 18px;
-    color: #0f0f0f;
-    display: block;
-    transition: color 0.3s;
+  text-decoration: none;
+  font-size: 18px;
+  color: #0f0f0f;
+  display: block;
+  transition: color 0.3s;
 }
 
 nav ul li a:hover {
-    color: #ff6565;
+  color: #ff6565;
 }
 
 .content {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin: 20px auto;
-    width: 75%;
-    max-width: 800px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+  width: 75%;
+  max-width: 800px;
 }
 
 h2 {
-    font-size: 24px;
-    color: black;
+  font-size: 24px;
+  color: black;
 }
 
-.user-name{
-    color: #ff6565;
+.user-name {
+  color: #ff6565;
 }
 p {
-    font-size: 18px;
-    color: #555;
+  font-size: 18px;
+  color: #555;
+}
+
+/* CODE TO STYLE FAVORITE RECIPES */
+
+.recipe-items {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px; /* Adjust the gap between the items as needed */
+  margin: 0;
+}
+
+.recipe-items li {
+  flex-basis: calc(50% - 20px); /* 50% width minus gap to fit two items */
+  text-align: center;
+  margin-bottom: 20px; /* Adjust the margin between rows as needed */
+
+  /* For responsiveness on smaller screens */
+  @media (max-width: 768px) {
+    flex-basis: 100%; /* Display one item per row on smaller screens */
+  }
+}
+
+.uk-card {
+  border: 2px solid green;
+  max-width: calc(50% - 20px);
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 10px; /* Apply border radius to the card */
+  overflow: hidden; /* Hide content overflow */
+}
+
+.uk-card img {
+  max-width: 100%; /* Make the image responsive */
+  border-radius: 10px 10px 0 0; /* Apply border radius to the image */
+}
+
+.uk-card-title {
+  font-size: 13px;
+  margin: 10px; /* Add some margin around the title */
+  text-wrap: wrap;
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add an ellipsis (...) for overflow text */
+}
+
+.remove-btn{
+  background-color: rgba(235, 74, 54, 1);
+  padding: 10px;
+  width: 100px;
+  border: 0;
+  border-radius: 30px;
+  color: #ffffff;
+  text-align: center;
+  opacity: 0.9;
+  height: 40px;
+}
+
+.remove-btn:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .recipe-items {
+    flex-direction: column; /* Stack cards on top of each other */
+    align-items: center; /* Center-align the cards */
+  }
 }

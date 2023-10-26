@@ -92,3 +92,11 @@ def change_password():
             flash('Wrong password', 'danger')
             return redirect(url_for('user.change_password'))
     return render_template('user/change_password.html', user=user)
+
+
+@user.route('/favorite-recipes')
+@login_required
+def favorite_recipes():
+    """function to render favorite recipe page"""
+    user = User.query.filter_by(email=current_user.email).first_or_404()
+    return render_template('user/favorite_recipes.html', user=user)

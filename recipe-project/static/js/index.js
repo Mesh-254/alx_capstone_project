@@ -66,7 +66,7 @@ menuClose.addEventListener('click', () => {
 });
 
 
-// code to handle adding recipes to favorites when heart icon is clicked\
+
 document.addEventListener("DOMContentLoaded", function () {
     const recipeItems = document.querySelectorAll(".uk-card");
 
@@ -77,24 +77,30 @@ document.addEventListener("DOMContentLoaded", function () {
         // Add a unique identifier to the uk-card element, e.g., data-recipe-id
         recipeItem.setAttribute("data-recipe-id", index);
 
+        // Retrieve the recipe information
+        const title = recipeData.querySelector(".uk-card-title").textContent;
+
+        // Retrieve the image source
+        const imageSrc = recipeItem.querySelector("img").getAttribute("src");
+
+        // Create an object to store the recipe data
+        const recipe = {
+            id: recipeItem.getAttribute("data-recipe-id"),
+            title: title,
+            imageSrc: imageSrc, // Add the image source to the object
+        };
+
+        // Check if the recipe is already in local storage
+        const existingRecipe = localStorage.getItem(`recipe-${recipe.id}`);
+
+        if (existingRecipe) {
+            // Change the heart icon color to red for existing favorite recipes
+            heartIcon.querySelector("svg path").setAttribute("fill", "red");
+        }
+
         // Add a click event listener to the heart icon
         heartIcon.addEventListener("click", function (event) {
             event.preventDefault();
-
-            // Retrieve the recipe information
-            const title = recipeData.querySelector(".uk-card-title").textContent;
-
-            // Retrieve the image source
-            const imageSrc = recipeItem.querySelector("img").getAttribute("src");
-
-            // Create an object to store the recipe data
-            const recipe = {
-                id: recipeItem.getAttribute("data-recipe-id"),
-                title: title,
-                imageSrc: imageSrc, // Add the image source to the object
-            };
-            // Check if the recipe is already in local storage
-            const existingRecipe = localStorage.getItem(`recipe-${recipe.id}`);
 
             if (existingRecipe) {
                 alert("Recipe is already in favorites!");
@@ -102,15 +108,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Change the heart icon color to red
                 heartIcon.querySelector("svg path").setAttribute("fill", "red");
 
-                // Add the recipe to local storage (you can customize the key)
+                // Add the recipe to local storage 
                 localStorage.setItem(`recipe-${recipe.id}`, JSON.stringify(recipe));
 
-                // Display a confirmation message (you can customize this part)
+                // Display a confirmation message
                 alert("Recipe added to favorites!");
             }
         });
     });
 });
+
 
 
 // code To create a shopping list from the HTML list 
