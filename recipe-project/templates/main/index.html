@@ -100,14 +100,18 @@
     <main>
         <!-- Body section  -->
         <section class="body-section">
+           
             <div class="body-text">
                 <h1 id="heading">Choose from thousands of </br>recipes</h1>
                 <p id="para">Recipes Reimagined, Flavors Explored: Your dietary Co-Pilot.</br>
                     Unleash Your Inner Chef: The Ultimate Recipe Finder.</p>
             </div>
+            {% if current_user.is_authenticated %}
+            {% else %}
             <div>
                 <a href="/signup"><button id="signup-today">Sign up today</button></a>
             </div>
+            {% endif %}
         </section>
         <!-- End of Body section  -->
     </main>

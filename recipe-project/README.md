@@ -21,6 +21,7 @@ FlavorRover acknowledges the daily struggle of "What's for Dinner?" and aims to 
 - Community Engagement: Connect with fellow food enthusiasts, share culinary creations, and participate in discussions.
 
 ## Installation
+
 Clone the repository In your terminal window, navigate into the project Run pip3 install -r requirements.txt to make sure all of the necessary Python packages (Flask, SQLAlchemy and others) are installed Create a .env file in the root of the directory to setup database and secret_key run flask db migrate --upgrade to update tables in your database run flask app
 
 ## Problem to Solve
@@ -44,31 +45,37 @@ FlavorRover delivers the following value to its users:
 ## Features and Functionality
 
 ### Recipe Exploration
+
 - Explore a vast collection of diverse recipes.
 - Search by dishes, cuisines, ingredients, and dietary restrictions.
-  
+
 ### Recipe Management
+
 - Save, rate, and organize your favorite recipes in a personalized library.
 
 ### Educational Resources
+
 - Access cooking tips, techniques, and instructional videos.
 
 ### Shopping Lists
+
 - Generate shopping lists based on selected recipes for efficient meal planning.
 
 ### Community and Social Interaction
+
 - Join discussions, comment on recipes, rate recipes, and connect with a community of food enthusiasts.
 
 ## Technologies Used
+
 ### Front End
+
 - **HTML and CSS**: Create a user-friendly and visually appealing interface.
 - **JavaScript**: Enhance user experience, perform client-side validation, and create dynamic elements.
 - **Responsive Web Design (CSS Frameworks)**: Ensure the application is accessible on various devices and screen sizes.
 - **Bootstrap**
 
-
-
 ### BackEnd
+
 - **Python (Flask)**: Handle recipe data, search operations, user accounts, and serve as the application's web server.
 - **External API**: Fetch recipe data and culinary information.
 - **Database (MySQL)**: Store and manage user data, recipe details, saved recipes, ratings, and more.
@@ -79,6 +86,7 @@ FlavorRover delivers the following value to its users:
 ## Screenshots
 
 <img src="./static/images/Screenshot from 2023-10-26 14-19-42.png">
+
 ## Future Enhancements
 
 In the future, we plan to add more features and enhance user interactivity:
