@@ -113,3 +113,8 @@ def favorite_recipes():
     
     # Render the 'user/favorite_recipes.html' template and pass user as context
     return render_template('user/favorite_recipes.html', user=user)
+
+@user.route('/contact')
+def contact():
+    """function to handle contacts"""
+    return render_template('user/contact_page.html')
