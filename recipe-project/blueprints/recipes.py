@@ -3,7 +3,7 @@
 from flask import *
 from flask_paginate import Pagination, get_page_parameter
 from flask.cli import load_dotenv
-from flask_login import current_user
+from flask_login import current_user, login_required
 import os
 import requests
 from urllib.parse import unquote
@@ -223,7 +223,9 @@ def get_similar_recipes(recipe_id, number=10):
 
 
 # Route to view a specific recipe with a given recipe ID
+
 @recipes.route('/recipe/<int:recipe_id>')
+@login_required
 def view_recipe(recipe_id):
     """function to fetch particular recipe details"""
     # Get the search query from the URL query parameters

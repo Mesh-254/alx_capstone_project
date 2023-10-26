@@ -1,3 +1,4 @@
+/* CSS for the login section */
 .login-section {
   display: flex;
   flex-direction: column;
@@ -7,6 +8,7 @@
   background-color: #f4f4f4;
 }
 
+/* Styling for the login container */
 .login {
   font-family: ubuntu;
   padding: 20px;
@@ -15,6 +17,7 @@
   width: 100%;
 }
 
+/* Styling for the heading text */
 .heading-text {
   font-size: 35px;
   text-align: center;
@@ -22,26 +25,34 @@
   font-family: "Ubuntu";
   font-weight: 500;
 }
+
+/* Styling for the logo */
 .logo {
   color: rgba(235, 74, 54, 1);
 }
+
+/* Center-align text */
 .uk-text-center {
   text-align: center;
   font-size: 18px;
   margin-bottom: 20px;
 }
 
+/* Styling for form labels */
 .uk-form-label {
   flex-basis: 28%;
   font-family: "Poppins", sans-serif;
   margin-bottom: 0%;
 }
+
+/* Styling for input fields */
 .uk-width {
   display: flex;
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
 }
+
 .uk-input {
   padding: 10px 60px;
   margin: 20px 0;
@@ -52,16 +63,19 @@
   font-size: 0.875rem;
 }
 
+/* Styling for muted links */
 .uk-link-muted {
   color: #007bff;
   text-decoration: none;
   transition: color 0.3s;
 }
 
+/* Hover effect for muted links */
 .uk-link-muted:hover {
   opacity: 0.7;
 }
 
+/* Styling for buttons */
 .uk-button {
   background-color: rgba(235, 74, 54, 1);
   color: #fff;
@@ -73,17 +87,18 @@
   margin-top: 10px;
 }
 
+/* Hover effect for primary buttons */
 .uk-button-primary:hover {
   opacity: 0.8;
 }
 
-
+/* Styling for paragraph text within .uk-width elements */
 .uk-width p {
   color: red;
   font-size: medium;
 }
 
+/* Styling to remove underlines from anchor links within .uk-width elements */
 .uk-width a {
-    text-decoration:none !important ;
+  text-decoration: none !important;
 }
-

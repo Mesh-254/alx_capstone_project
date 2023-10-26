@@ -1,27 +1,35 @@
 #!/usr/bin/python3
-"""Module to fetch user information """
+
+"""Module to fetch user information"""
+
+# Import necessary modules
 from flask import *
-import re  # regular expression import
+import re  # Import the regular expression module
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user
 
+# Import user-related models and database
 from models.user import User
 from models.database import db
 
-
+# Create a Blueprint for authentication routes
 auth = Blueprint('auth', __name__)
+
+# Route for displaying the login form
 
 
 @auth.route('/login')
 def login():
-    """login method"""
+    """Display the login form."""
     # Render the login form if it's a GET request
     return render_template('user/login.html')
+
+# Route for handling login requests (GET and POST)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login_post():
-    """Function to perform login"""
+    """Handle user login."""
     # Fetch data from the form
     email = request.form.get('email')
     password = request.form.get('password')
@@ -44,10 +52,12 @@ def login_post():
         # Redirect to the main page after successful login
         return redirect(url_for('recipes.index'))
 
+# Route for displaying the signup form and handling signup requests
+
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
-    """Function to perform signup of users"""
+    """Display the signup form and handle user registration."""
     if request.method == 'POST':
         name = request.form.get('name')
         email = request.form.get('email')
@@ -68,7 +78,8 @@ def signup():
 
         # Check if the password contains at least one lowercase and one uppercase letter
         if not re.search(r'[a-z]', password) or not re.search(r'[A-Z]', password):
-            flash("Password must contain both uppercase and lowercase characters.", 'danger')
+            flash(
+                "Password must contain both uppercase and lowercase characters.", 'danger')
             return redirect(url_for('auth.signup'))
 
         # Check if the password contains at least one digit
@@ -106,8 +117,11 @@ def signup():
     # Render the signup form if it's a GET request
     return render_template('user/signup.html')
 
+# Route for logging out the user
+
 
 @auth.route('/logout')
 def logout():
+    """Logout the user and redirect to the main page."""
     logout_user()
     return redirect(url_for('recipes.index'))

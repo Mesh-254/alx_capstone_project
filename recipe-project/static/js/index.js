@@ -1,86 +1,86 @@
+// When the DOM is fully loaded, execute the following code
 document.addEventListener('DOMContentLoaded', function () {
 
+    // Get all elements with the 'expandable' class
     const expandableList = document.querySelectorAll('.expandable');
+
+    // Iterate through each 'expandable' element
     expandableList.forEach(item => {
-        const icon = item.querySelector('.icon');
-        const subList = item.querySelector('.sublist');
+        const icon = item.querySelector('.icon'); // Get the icon within the 'expandable' element
+        const subList = item.querySelector('.sublist'); // Get the sublist within the 'expandable' element
+
+        // Add a click event listener to the icon
         icon.addEventListener('click', function () {
             if (subList.style.display === 'none' || subList.style.display === '') {
-                icon.textContent = '-'
-                subList.style.display = 'block';
+                icon.textContent = '-'; // Change the icon to '-' if the sublist is hidden
+                subList.style.display = 'block'; // Display the sublist
             }
             else {
-                icon.textContent = ('+');
-                subList.style.display = 'none';
+                icon.textContent = ('+'); // Change the icon to '+' if the sublist is visible
+                subList.style.display = 'none'; // Hide the sublist
             }
         });
-        // close the sublists on page reload
+
+        // Close the sublists on page reload
         if (subList.style.display === 'none' || subList.style.display === '') {
             icon.textContent = '+';
         }
-    })
-});
-
-
-// Fade text in detail page when step icon is clicked 
-// Get all step-icon elements
-const icons = document.querySelectorAll('.step-icon');
-
-// Add a click event listener to each step-icon
-icons.forEach(icon => {
-    icon.addEventListener('click', function () {
-        // Get the associated step-content element
-        const stepContent = this.nextElementSibling;
-        // Add a class to adjust the position with CSS
-        stepContent.classList.add('fade-lower');
     });
 });
 
-// Get references to the HTML elements
+// Add a click event listener to step icons to fade associated step content
+const icons = document.querySelectorAll('.step-icon');
+
+icons.forEach(icon => {
+    icon.addEventListener('click', function () {
+        const stepContent = this.nextElementSibling; // Get the associated step content
+        stepContent.classList.add('fade-lower'); // Add a class to adjust the position with CSS for fading
+    });
+});
+
+// Get references to menu-related HTML elements
 const menuBars = document.getElementById('menu-bars'); // The hamburger menu icon
 const menuClose = document.getElementById('menu-close'); // The close icon for the mobile menu
 const mobileMenu = document.querySelector('.mobile-menu'); // The list of menu items in the mobile menu
 
-// Create a variable to track the menu state
+// Create a variable to track the mobile menu state
 let menuOpen = false; // Variable to track whether the mobile menu is open or closed
 
 // Add a click event listener to the hamburger menu icon
 menuBars.addEventListener('click', () => {
-    // Toggle the menu state by changing the value of the menuOpen variable
-    menuOpen = !menuOpen; // If it was open, now it's closed, and vice versa
+    menuOpen = !menuOpen; // Toggle the menu state (open or closed)
 
     if (menuOpen) {
-        // When menuBars is clicked, show the mobile menu, change the icon to "X"
-        mobileMenu.style.display = 'block'; // Display the mobile menu by setting its style to 'block'
-        menuBars.style.display = 'none'; // Hide the menuBars icon by setting its style to 'none'
-        menuClose.style.display = 'block'; // Display the menuClose icon by setting its style to 'block'
+        mobileMenu.style.display = 'block'; // Show the mobile menu
+        menuBars.style.display = 'none'; // Hide the hamburger menu icon
+        menuClose.style.display = 'block'; // Show the close icon for the mobile menu
     }
 });
 
+// Add a click event listener to the close icon for the mobile menu
 menuClose.addEventListener('click', () => {
-
-    // When menuClose is clicked or menuBars is clicked again, close the mobile menu, change the icon back to menuBars
-    mobileMenu.style.display = 'none'; // Hide the mobile menu by setting its style to 'none'
-    menuBars.style.display = 'block'; // Display the menuBars icon by setting its style to 'block'
-    menuClose.style.display = 'none'; // Hide the menuClose icon by setting its style to 'none'
+    mobileMenu.style.display = 'none'; // Hide the mobile menu
+    menuBars.style.display = 'block'; // Show the hamburger menu icon
+    menuClose.style.display = 'none'; // Hide the close icon for the mobile menu
 });
 
-
-
+// When the DOM is fully loaded, execute the following code
 document.addEventListener("DOMContentLoaded", function () {
+    // Get all elements with the class 'uk-card' (likely recipe items)
     const recipeItems = document.querySelectorAll(".uk-card");
 
+    // Iterate through each 'uk-card' element
     recipeItems.forEach(function (recipeItem, index) {
-        const heartIcon = recipeItem.querySelector(".heart-icon a");
-        const recipeData = recipeItem.querySelector(".recipe-data");
+        const heartIcon = recipeItem.querySelector(".heart-icon a"); // Find the heart icon
+        const recipeData = recipeItem.querySelector(".recipe-data"); // Find recipe data
 
-        // Add a unique identifier to the uk-card element, e.g., data-recipe-id
+        // Add a unique identifier to the 'uk-card' element
         recipeItem.setAttribute("data-recipe-id", index);
 
-        // Retrieve the recipe information
+        // Retrieve the recipe title from the recipe data
         const title = recipeData.querySelector(".uk-card-title").textContent;
 
-        // Retrieve the image source
+        // Retrieve the image source for the recipe
         const imageSrc = recipeItem.querySelector("img").getAttribute("src");
 
         // Create an object to store the recipe data
@@ -117,33 +117,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
-
-
-// code To create a shopping list from the HTML list 
-// Add an event listener to the "Generate PDF" button
-document.getElementById('generate-pdf').addEventListener('click', function () {
-    // Extract list items
-    const listItems = document.querySelectorAll('.custom-list li');
-
-    // an empty array to store the shopping list items
-    const shoppingList = [];
-    listItems.forEach(function (item) {
-      shoppingList.push(item.textContent);
-    });
-
-    // Generate a shopping list as a string
-    const shoppingListText = shoppingList.join('\n');
-
-    // Create a PDF
-    html2pdf().from(shoppingListText).outputPdf(function (pdf) {
-      // Download the PDF
-      const pdfBlob = new Blob([pdf], { type: 'application/pdf' });
-      const url = URL.createObjectURL(pdfBlob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'shopping-list.pdf';
-      a.click();
-      URL.revokeObjectURL(url);
-    });
-  });

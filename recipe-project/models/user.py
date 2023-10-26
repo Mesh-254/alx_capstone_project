@@ -39,5 +39,5 @@ class User(db.Model, UserMixin):
 
     # Method to represent the User object as a string
     def __repr__(self):
-        # It should likely be return str(vars(self)) to return a dictionary representation of the User instance.
+        #return a dictionary representation of the User instance.
         return vars(User)
